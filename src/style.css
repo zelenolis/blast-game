@@ -1,3 +1,8 @@
+@font-face {
+    font-family: 'Scary';
+    src: url('./assets/Griffy-Regular.ttf');
+}
+
 body {
     display: flex;
     align-items: center;
