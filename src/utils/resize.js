@@ -10,3 +10,13 @@ export function startLogoSize (screenWidth, logoWidth, logoHeight) {
     }
     return [w, h]
 }
+
+export function startFontSize (screenWidth) {
+    const maxEnlarge = 700
+    const maxFontSize = 70
+    if (screenWidth > maxEnlarge) {
+        return maxFontSize
+    } else {
+        return screenWidth / 10
+    }
+}

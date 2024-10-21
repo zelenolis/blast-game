@@ -1,5 +1,5 @@
 import Pumpkin from '../assets/pumpkin.png'
-import { startLogoSize } from '../utils/resize.js'
+import { startLogoSize, startFontSize } from '../utils/resize.js'
 import { baseColor, darkColor } from '../constants.js'
 
 
@@ -31,14 +31,17 @@ function startLogoDraw() {
     startImage.src = Pumpkin
 }
 
-export function startScreen() {
-    clearCanvas()
-    startLogoDraw()
-
+function startTextDraw() {
     document.fonts.load('10pt "Scary"').then(() => {
-        ctx.font = '70px Scary'
+        ctx.font = `${startFontSize(canvasW)}px Scary`
         ctx.fillStyle = darkColor
         ctx.textAlign = "center"
         ctx.fillText('click to start', canvasW / 2, canvasH - canvasH / 3)
     })
+}
+
+export function startScreen() {
+    clearCanvas()
+    startLogoDraw()
+    startTextDraw()
 }
