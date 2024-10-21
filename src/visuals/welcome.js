@@ -1,5 +1,7 @@
-import { baseColor, darkColor } from '../constants.js'
 import Pumpkin from '../assets/pumpkin.png'
+import { startLogoSize } from '../utils/resize.js'
+import { baseColor, darkColor } from '../constants.js'
+
 
 const container = document.getElementById('container')
 const canvas = document.createElement('canvas')
@@ -16,17 +18,22 @@ function clearCanvas() {
     ctx.fillRect(0, 0, canvasW, canvasH)
 }
 
-function startLogoDraw() {}
+function startLogoDraw() {
+    
+    const startImage = new Image()
+
+    startImage.onload = function() {
+        const dimensions = startLogoSize(canvasW, startImage.width, startImage.height)
+        const x = canvasW / 2 - dimensions[0] / 2
+        const y = canvasH / 3 - dimensions[1] / 2
+        ctx.drawImage(startImage, x, y, dimensions[0], dimensions[1])
+    }
+    startImage.src = Pumpkin
+}
 
 export function startScreen() {
     clearCanvas()
-    const startImage = new Image()
-    startImage.onload = function() {
-        const x = canvasW / 2 - startImage.width / 2
-        const y = canvasH / 3 - startImage.height / 2
-        ctx.drawImage(startImage, x, y)
-    }
-    startImage.src = Pumpkin
+    startLogoDraw()
 
     document.fonts.load('10pt "Scary"').then(() => {
         ctx.font = '70px Scary'
