@@ -1,6 +1,6 @@
-// Game consts
-
-export const baseColor = 'blue'
+export const darkColor = '#292c33'
+export const lightColor = 'white'
+export const baseColor = '#C76E00'
 
 // Field size X * Y
 export const filedX = 10

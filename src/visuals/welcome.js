@@ -1,4 +1,4 @@
-import { baseColor } from '../constants.js'
+import { baseColor, darkColor } from '../constants.js'
 import Pumpkin from '../assets/pumpkin.png'
 
 const container = document.getElementById('container')
@@ -30,7 +30,7 @@ export function startScreen() {
 
     document.fonts.load('10pt "Scary"').then(() => {
         ctx.font = '70px Scary'
-        ctx.fillStyle = 'black'
+        ctx.fillStyle = darkColor
         ctx.textAlign = "center"
         ctx.fillText('click to start', canvasW / 2, canvasH - canvasH / 3)
     })
