@@ -1,1 +1,4 @@
-console.log('Hello There!');
+import './style.css'
+import { startScreen } from './visuals/welcome.js'
+
+startScreen()
