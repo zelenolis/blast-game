@@ -35,12 +35,15 @@ export default {
             },
             {
                 test: /\.(png|svg|jpg|gif|ico)$/,
-                use: ['file-loader']
+                type: 'asset/resource'
             }
         ]
     },
     devServer: {
-        static: resolve(__dirname, 'dist'),
+        static: {
+            directory: resolve(__dirname, 'dist'),
+            publicPath: '/assets'
+        },
         compress: true,
         port: 9000,
     },
