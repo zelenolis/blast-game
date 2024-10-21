@@ -4,7 +4,7 @@ import { baseColor, darkColor } from '../constants.js'
 
 
 const container = document.getElementById('container')
-const canvas = document.createElement('canvas')
+export const canvas = document.createElement('canvas')
 container.appendChild(canvas)
 
 const canvasW = (canvas.width = container.offsetWidth)
