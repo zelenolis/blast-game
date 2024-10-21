@@ -11,16 +11,27 @@ const canvasH = (canvas.height = container.offsetHeight)
 const ctx = canvas.getContext('2d')
 
 
-export function startScreen() {
+function clearCanvas() {
     ctx.fillStyle = baseColor
     ctx.fillRect(0, 0, canvasW, canvasH)
+}
+
+function startLogoDraw() {}
+
+export function startScreen() {
+    clearCanvas()
     const startImage = new Image()
     startImage.onload = function() {
         const x = canvasW / 2 - startImage.width / 2
         const y = canvasH / 3 - startImage.height / 2
-        console.log(startImage.width)
         ctx.drawImage(startImage, x, y)
     }
     startImage.src = Pumpkin
 
+    document.fonts.load('10pt "Scary"').then(() => {
+        ctx.font = '70px Scary'
+        ctx.fillStyle = 'black'
+        ctx.textAlign = "center"
+        ctx.fillText('click to start', canvasW / 2, canvasH - canvasH / 3)
+    })
 }
