@@ -1,4 +1,6 @@
-import { canvas, ctx, canvasW, canvasH } from "./welcome";
+import { canvas, ctx, canvasW, canvasH } from "./welcome.js";
+import { fieldPos } from "../utils/positions.js";
+import { darkColor } from "../constants.js";
 
 
 function levelDraw() {}
@@ -7,7 +9,11 @@ function currentScoreDraw() {}
 
 function totalScoreDraw() {}
 
-function fieldDraw() {}
+export function fieldDraw() {
+    const coords = fieldPos()
+    ctx.fillStyle = darkColor
+    ctx.fillRect(coords[0], coords[1], coords[2], coords[2])
+}
 
 function tileDraw() {}
 

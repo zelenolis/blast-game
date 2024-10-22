@@ -1,4 +1,4 @@
-import { canvasW, canvasH } from "../visuals/welcome";
+import { canvasW, canvasH } from "../visuals/welcome.js";
 
 const headerHeight = 0.15
 const fieldHeight = 0.7
@@ -13,13 +13,13 @@ export function totalScorePos() {}
 export function fieldPos() {
     if (canvasW > canvasH) {
         const filedLenght = canvasH * fieldHeight
-        y = canvasH * headerHeight
-        x = (canvasW - filedLenght) / 2
+        const y = canvasH * headerHeight
+        const x = (canvasW - filedLenght) / 2
         return [x, y, filedLenght]
     } else {
         const filedLenght = canvasW
-        y = canvasH * fieldHeight
-        x = 0
+        const y = canvasH * headerHeight
+        const x = 0
         return [x, y, filedLenght]
     }
 }

@@ -13,7 +13,7 @@ export const canvasH = (canvas.height = container.offsetHeight)
 export const ctx = canvas.getContext('2d')
 
 
-function clearCanvas() {
+export function clearCanvas() {
     ctx.fillStyle = baseColor
     ctx.fillRect(0, 0, canvasW, canvasH)
 }
