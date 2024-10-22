@@ -4,11 +4,25 @@ import Color3 from '../assets/set/3.png'
 import Color4 from '../assets/set/4.png'
 import Color5 from '../assets/set/5.png'
 import Color6 from '../assets/set/6.png'
+import Color7 from '../assets/set/7.png'
+import Color8 from '../assets/set/8.png'
 import { ctx, canvasW } from "./welcome.js";
 import { fieldPos, levelPos, currentScorePos, totalScorePos, remixButtonPos } from "../utils/positions.js";
 import { darkColor, baseColor, lightColor } from "../constants.js";
 import { startFontSize } from "../utils/resize.js";
 import { field } from "../components/game.js";
+
+
+const colorMap = {
+    1: Color1,
+    2: Color2,
+    3: Color3,
+    4: Color4,
+    5: Color5,
+    6: Color6,
+    7: Color8,
+    8: Color8,
+}
 
 
 function textPrint(txt, coords) {
@@ -83,7 +97,7 @@ function tileDraw(tile, coords) {
     tileImg.onload = function() {
         ctx.drawImage(tileImg, tileX, tileY, tileLenght, tileLenght)
     }
-    tileImg.src = Color1
+    tileImg.src = colorMap[tile.color]
 }
 
 function remixButtonDraw() {
