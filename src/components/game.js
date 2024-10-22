@@ -1,6 +1,6 @@
 import { filedX, filedY, colours } from '../constants.js'
 
-const field = [];
+export const field = [];
 
 class Tile {
     constructor(x, y, color) {
