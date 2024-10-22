@@ -8,3 +8,6 @@ export const filedY = 10
 
 // Number of color variations
 export const colours = 5
+
+// number of remixes
+export const remixes = 3

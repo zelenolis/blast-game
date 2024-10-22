@@ -7,10 +7,10 @@ const container = document.getElementById('container')
 export const canvas = document.createElement('canvas')
 container.appendChild(canvas)
 
-const canvasW = (canvas.width = container.offsetWidth)
-const canvasH = (canvas.height = container.offsetHeight)
+export const canvasW = (canvas.width = container.offsetWidth)
+export const canvasH = (canvas.height = container.offsetHeight)
 
-const ctx = canvas.getContext('2d')
+export const ctx = canvas.getContext('2d')
 
 
 function clearCanvas() {
