@@ -10,7 +10,7 @@ class Tile {
     }
 }
 
-function fieldInit() {
+export function fieldInit() {
     for (let i = 0; i < filedX; i++) {
         for (let j = 0; j < filedY; j++) {
             field.push(new Tile(i, j, randomColor()))

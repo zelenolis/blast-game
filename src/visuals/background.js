@@ -1,7 +1,14 @@
-import { canvas, ctx, canvasW, canvasH } from "./welcome.js";
+import Color1 from '../assets/set/1.png'
+import Color2 from '../assets/set/2.png'
+import Color3 from '../assets/set/3.png'
+import Color4 from '../assets/set/4.png'
+import Color5 from '../assets/set/5.png'
+import Color6 from '../assets/set/6.png'
+import { ctx, canvasW } from "./welcome.js";
 import { fieldPos, levelPos, currentScorePos, totalScorePos, remixButtonPos } from "../utils/positions.js";
 import { darkColor, baseColor, lightColor } from "../constants.js";
 import { startFontSize } from "../utils/resize.js";
+import { field } from "../components/game.js";
 
 
 function textPrint(txt, coords) {
@@ -61,9 +68,23 @@ export function fieldDraw() {
     currentScoreDraw()
     totalScoreDraw()
     remixButtonDraw()
+
+    for (let tile of field) {
+        tileDraw(tile, coords)
+    }
 }
 
-function tileDraw() {}
+function tileDraw(tile, coords) {
+    const tileLenght = coords[2] / Math.sqrt(field.length)
+    const tileX = coords[0] + tile.x * tileLenght
+    const tileY = coords[1] + tile.y * tileLenght
+    const tileImg = new Image()
+
+    tileImg.onload = function() {
+        ctx.drawImage(tileImg, tileX, tileY, tileLenght, tileLenght)
+    }
+    tileImg.src = Color1
+}
 
 function remixButtonDraw() {
     const coords = remixButtonPos()
