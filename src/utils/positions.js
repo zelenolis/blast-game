@@ -42,4 +42,11 @@ export function fieldPos() {
     }
 }
 
-export function remixButtonPos() {}
+export function remixButtonPos() {
+    const rectDimension = [
+        0, 
+        canvasH - canvasH * footerHeight, 
+        canvasW - 2 * canvasW * headerThirdPart, 
+        canvasH * footerHeight]
+    return rectDimension
+}
