@@ -1,5 +1,5 @@
 import { canvas, ctx, canvasW, canvasH } from "./welcome.js";
-import { fieldPos, levelPos, currentScorePos, totalScorePos } from "../utils/positions.js";
+import { fieldPos, levelPos, currentScorePos, totalScorePos, remixButtonPos } from "../utils/positions.js";
 import { darkColor, baseColor, lightColor } from "../constants.js";
 import { startFontSize } from "../utils/resize.js";
 
@@ -59,8 +59,17 @@ export function fieldDraw() {
     levelDraw()
     currentScoreDraw()
     totalScoreDraw()
+    remixButtonDraw()
 }
 
 function tileDraw() {}
 
-function remixButtonDraw() {}
+function remixButtonDraw() {
+    const coords = remixButtonPos()
+    ctx.fillStyle = 'blue'
+    ctx.fillRect(coords[0], coords[1], coords[2], coords[3])
+
+    const text = 'remix'
+
+    textPrint(text, coords)
+}
