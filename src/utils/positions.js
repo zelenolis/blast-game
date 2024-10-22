@@ -29,7 +29,10 @@ export function totalScorePos() {
 }
 
 export function fieldPos() {
-    if (canvasW > canvasH) {
+    if (
+        canvasW > canvasH || 
+        canvasW + canvasW * (footerHeight + headerHeight) > canvasH
+    ) {
         const filedLenght = canvasH * fieldHeight
         const y = canvasH * headerHeight
         const x = (canvasW - filedLenght) / 2
@@ -43,10 +46,11 @@ export function fieldPos() {
 }
 
 export function remixButtonPos() {
+    const padding = 5
     const rectDimension = [
-        0, 
-        canvasH - canvasH * footerHeight, 
-        canvasW - 2 * canvasW * headerThirdPart, 
-        canvasH * footerHeight]
+        canvasW * headerThirdPart + padding, 
+        canvasH * (headerHeight + fieldHeight) + padding, 
+        canvasW - 2 * canvasW * headerThirdPart - 2 * padding, 
+        canvasH * footerHeight - 2 * padding]
     return rectDimension
 }

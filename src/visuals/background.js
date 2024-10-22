@@ -13,9 +13,10 @@ function textPrint(txt, coords) {
         const textWidth = textMetrics.width;
 
         const textX = coords[0] + (coords[2] - textWidth) / 2;
-        const textY = coords[1] + (coords[3] + textHeight) / 2;
+        const textY = 1 + coords[1] + (coords[3] + textHeight) / 2;
 
         ctx.textAlign = "start"
+        ctx.textBaseline = 'bottom';
         ctx.fillStyle = lightColor
         ctx.fillText(txt, textX, textY)
     })
@@ -66,9 +67,12 @@ function tileDraw() {}
 
 function remixButtonDraw() {
     const coords = remixButtonPos()
-    ctx.fillStyle = 'blue'
-    ctx.fillRect(coords[0], coords[1], coords[2], coords[3])
-
+    ctx.strokeStyle  = darkColor
+    ctx.fillStyle  = darkColor
+    ctx.beginPath();
+    ctx.roundRect(coords[0], coords[1], coords[2], coords[3], [10])
+    ctx.stroke();
+    ctx.fill();
     const text = 'remix'
 
     textPrint(text, coords)
