@@ -19,9 +19,13 @@ function findTileCoords(x, y, frame) {
     const tileLenght = frame[2] / Math.sqrt(field.length)
     const xField = Math.floor((x - frame[0]) / tileLenght)
     const yField = Math.floor((y - frame[1]) / tileLenght)
-    console.log(xField, yField)
+    findTileArray(xField, yField)
 }
 
-function findTile(x, y) {
-    //
+function findTileArray(x, y) {
+    for (let tile of field) {
+        if (tile.x === x && tile.y === y) {
+            console.log(tile)
+        }
+    }
 }
