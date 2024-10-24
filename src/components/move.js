@@ -1,6 +1,6 @@
 import { fieldPos, remixButtonPos } from '../utils/positions.js'
 import { field } from './game.js'
-import { tileDestroy } from '../visuals/animations.js'
+import { destroyTiles } from '../visuals/animations.js'
 
 
 export function clickChecker(x, y) {
@@ -74,13 +74,7 @@ function getAllConnectedTiles(x, y) {
         }
     }
     
-    markAllTiles(allITiles)
+    destroyTiles(allITiles, field.length)
 }
 
-function markAllTiles(arr) {
-    const frame = fieldPos()
-    const tileLenght = frame[2] / Math.sqrt(field.length)
-    for (let item of arr) {
-        tileDestroy((item.x * tileLenght + frame[0]), (item.y * tileLenght + frame[1]), tileLenght)
-    }
-}
+function removeTilesFromData(arr) {}
