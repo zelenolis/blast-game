@@ -1,6 +1,7 @@
 import { fieldPos, remixButtonPos } from '../utils/positions.js'
 import { field } from './game.js'
 import { destroyTiles } from '../visuals/animations.js'
+import { filedX } from '../constants.js'
 
 
 export function clickChecker(x, y) {
@@ -77,4 +78,16 @@ function getAllConnectedTiles(x, y) {
     destroyTiles(allITiles, field.length)
 }
 
-function removeTilesFromData(arr) {}
+function clearAndCreate(allITiles) {
+    for (let i = 0; i < filedX; i++) {
+        const missingTiles = allITiles.filter((item) => item.x === i)
+        if (missingTiles.length > 0) {
+            const column = arr.filter((tile) => tile.x === i)
+            columnSort(column, missingTiles)
+        }
+    }
+}
+
+function columnSort(column) {
+    //
+}
