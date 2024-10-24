@@ -48,7 +48,7 @@ export function destroyTiles(arr, fieldLenght) {
     }
 }
 
-export function fallingTile(x, y, length, color) {
+export function appearTile(x, y, length, color) {
     const tileImg = new Image()
     tileImg.src = colorMap[color]
     let animateY = 0
@@ -59,6 +59,26 @@ export function fallingTile(x, y, length, color) {
             ctx.fillStyle = darkColor
             ctx.fillRect(x, y, length, length)
             ctx.drawImage(tileImg, x, y, length, animateY)
+
+            animateY += 5
+            if(animateY < length) {
+                requestAnimationFrame(animate)
+            }
+        }
+        animate()
+    }
+}
+
+export function moveTile(x, y, length, color) {
+    const tileImg = new Image()
+    tileImg.src = colorMap[color]
+    let animateY = 0
+
+    tileImg.onload = function() {
+        function animate() {
+            ctx.fillStyle = darkColor
+            ctx.fillRect(x, y, length, length * 2)
+            ctx.drawImage(tileImg, x, y + animateY, length, length)
 
             animateY += 5
             if(animateY < length) {
