@@ -29,3 +29,15 @@ function findTileArray(x, y) {
         }
     }
 }
+
+function checkPairs() {
+    //
+}
+
+function getNeighbors() {
+    //
+}
+
+function getAllConnectedTiles() {
+    //
+}
