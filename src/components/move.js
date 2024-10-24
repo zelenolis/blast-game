@@ -1,7 +1,8 @@
 import { fieldPos, remixButtonPos } from '../utils/positions.js'
 import { field } from './game.js'
 import { destroyTiles } from '../visuals/animations.js'
-import { filedX } from '../constants.js'
+import { filedX, filedY } from '../constants.js'
+import { arraySubstract } from '../utils/misc.js'
 
 
 export function clickChecker(x, y) {
@@ -74,20 +75,35 @@ function getAllConnectedTiles(x, y) {
             }
         }
     }
-    
+    clearAndCreate(allITiles)
     destroyTiles(allITiles, field.length)
 }
 
 function clearAndCreate(allITiles) {
     for (let i = 0; i < filedX; i++) {
-        const missingTiles = allITiles.filter((item) => item.x === i)
-        if (missingTiles.length > 0) {
-            const column = arr.filter((tile) => tile.x === i)
-            columnSort(column, missingTiles)
+        const destroyedTiles = allITiles.filter(item => item.x === i)
+        if (destroyedTiles.length > 0) {
+            const column = field.filter(tile => tile.x === i)
+            columnSort(arraySubstract(column, destroyedTiles))
         }
     }
 }
 
-function columnSort(column) {
-    //
+function columnSort(arr) {
+    const newColumn = []
+    let missings = 0
+    for (let i = filedY - 1; i >=0; i--) {
+        let item = arr.find(e => e.y === i)
+        if (!item) {
+            missings++
+        } else {
+            if (missings > 0) {
+                console.log(`{tile ${item.y}} became {tile ${i + missings}}`)
+            }
+            item.y = i + missings
+            newColumn.push(item)
+        }
+    }
+    newColumn.reverse()
+    console.log(newColumn)
 }
