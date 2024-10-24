@@ -36,8 +36,23 @@ function checkPairs() {
     //
 }
 
-function getNeighbors() {
-    //
+function getNeighbors(x, y, color) {
+    const matches = []
+    const directions = [
+        {dx: 1, dy: 0},
+        {dx: 0, dy: 1},
+        {dx: -1, dy: 0},
+        {dx: 0, dy: -1}
+    ]
+    for (let direction of directions) {
+        const newX = x + direction.dx
+        const newY = y + direction.dy
+        const neighbor = field.find(tile => tile.x === newX && tile.y === newY)
+        if (neighbor && neighbor.color === color) {
+            matches.push(neighbor)
+        }
+    }
+    return matches
 }
 
 function getAllConnectedTiles() {
