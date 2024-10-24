@@ -3,7 +3,7 @@ import { darkColor } from "../constants"
 import Ghost from '../assets/ghost.png'
 
 
-function tileDestroy(x, y, length) {
+export function tileDestroy(x, y, length) {
 
     clearTyle(x, y, length)
 
