@@ -1,5 +1,6 @@
 import { fieldPos, remixButtonPos } from '../utils/positions.js'
 import { field } from './game.js'
+import { tileDestroy } from '../visuals/animations.js'
 
 
 export function clickChecker(x, y) {
@@ -20,6 +21,7 @@ function findTileCoords(x, y, frame) {
     const xField = Math.floor((x - frame[0]) / tileLenght)
     const yField = Math.floor((y - frame[1]) / tileLenght)
     findTileArray(xField, yField)
+    tileDestroy((xField * tileLenght + frame[0]), (yField * tileLenght + frame[1]), tileLenght)
 }
 
 function findTileArray(x, y) {
