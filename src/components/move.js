@@ -21,13 +21,12 @@ function findTileCoords(x, y, frame) {
     const xField = Math.floor((x - frame[0]) / tileLenght)
     const yField = Math.floor((y - frame[1]) / tileLenght)
     findTileArray(xField, yField)
-    tileDestroy((xField * tileLenght + frame[0]), (yField * tileLenght + frame[1]), tileLenght)
 }
 
 function findTileArray(x, y) {
     for (let tile of field) {
         if (tile.x === x && tile.y === y) {
-            console.log(tile)
+            getAllConnectedTiles(x, y)
         }
     }
 }
@@ -55,6 +54,34 @@ function getNeighbors(x, y, color) {
     return matches
 }
 
-function getAllConnectedTiles() {
-    //
+function getAllConnectedTiles(x, y) {
+    const startTile = field.find(tile => tile.x === x && tile.y === y)
+    if (!startTile) { return }
+
+    const allITiles = []
+    const queue = [startTile]
+    const checked = new Set([`${x},${y}`])
+
+    while (queue.length > 0) {
+        const current = queue.shift()
+        allITiles.push(current)
+        const neighbors = getNeighbors(current.x, current.y, startTile.color)
+        for (let neighbor of neighbors) {
+            const key = `${neighbor.x},${neighbor.y}`
+            if (!checked.has(key)) {
+                checked.add(key)
+                queue.push(neighbor);
+            }
+        }
+    }
+    
+    markAllTiles(allITiles)
+}
+
+function markAllTiles(arr) {
+    const frame = fieldPos()
+    const tileLenght = frame[2] / Math.sqrt(field.length)
+    for (let item of arr) {
+        tileDestroy((item.x * tileLenght + frame[0]), (item.y * tileLenght + frame[1]), tileLenght)
+    }
 }
