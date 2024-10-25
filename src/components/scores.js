@@ -1,4 +1,4 @@
-let level = 1
+let level = 0
 let levelProgress = 0
 let totalScores = 0
 
@@ -22,5 +22,13 @@ export function getTotalScores() {
 export function levelProgressUp(n) {
     levelProgress += n
     totalScores += n
+
+    checkNextLevel(level, levelProgress)
 }
 
+function checkNextLevel(currentLevel, currentProgress) {
+    const needProgress = 10 * Math.pow(1.5, currentLevel)
+    if (currentProgress >= needProgress) {
+        levelup()
+    }
+}
