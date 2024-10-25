@@ -10,6 +10,7 @@ import Ghost from '../assets/ghost.png'
 import { ctx } from "./welcome.js"
 import { darkColor } from "../constants.js"
 import { fieldPos } from "../utils/positions.js"
+import { field } from '../components/game.js'
 
 
 const colorMap = {
@@ -48,29 +49,35 @@ export function destroyTiles(arr, fieldLenght) {
     }
 }
 
-export function appearTile(x, y, length, color) {
+export function appearTile(x, y, color) {
+    console.log(x,y)
+    const dimensions = getCoordsByTylePos(x, y)
     const tileImg = new Image()
     tileImg.src = colorMap[color]
     let animateY = 0
+    const animationspeed = 5
 
 
     tileImg.onload = function() {
         function animate() {
             ctx.fillStyle = darkColor
-            ctx.fillRect(x, y, length, length)
-            ctx.drawImage(tileImg, x, y, length, animateY)
+            ctx.fillRect(dimensions[0], dimensions[1], dimensions[2], animateY)
+            ctx.drawImage(tileImg, dimensions[0], dimensions[1], dimensions[2], animateY)
 
-            animateY += 5
-            if(animateY < length) {
+            animateY += animationspeed
+            if(animateY < dimensions[2]) {
                 requestAnimationFrame(animate)
+            } else {
+                ctx.fillRect(dimensions[0], dimensions[1], dimensions[2], dimensions[2])
+                ctx.drawImage(tileImg, dimensions[0], dimensions[1], dimensions[2], dimensions[2])
             }
         }
         animate()
     }
 }
 
-export function fallingTyle(x, y, yShift, color, fieldlength) {
-    const dimensions = getCoordsByTylePos(x, y, fieldlength)
+export function fallingTyle(x, y, yShift, color) {
+    const dimensions = getCoordsByTylePos(x, y)
     const xCoord = dimensions[0]
     const yCoord = dimensions[1]
     const tileLenght = dimensions[2]
@@ -78,9 +85,9 @@ export function fallingTyle(x, y, yShift, color, fieldlength) {
     moveTile(xCoord, yCoord, tileLenght, fallingLenght, color)
 }
 
-function getCoordsByTylePos(x, y, fieldlength) {
+function getCoordsByTylePos(x, y) {
     const frame = fieldPos()
-    const tileLenght = frame[2] / Math.sqrt(fieldlength)
+    const tileLenght = frame[2] / Math.sqrt(field.length)
     const xCoord = x * tileLenght + frame[0]
     const yCoord = y * tileLenght + frame[1]
     return [xCoord, yCoord, tileLenght]
