@@ -3,6 +3,7 @@ import { field, newTile } from './game.js'
 import { destroyTiles, fallingTyle, appearTile } from '../visuals/animations.js'
 import { filedX, filedY } from '../constants.js'
 import { arraySubstract } from '../utils/misc.js'
+import { tilesRedraw } from '../visuals/background.js'
 
 
 export function clickChecker(x, y) {
@@ -89,29 +90,53 @@ function clearAndCreate(allITiles) {
     }
 }
 
-function columnSort(arr) {
+async function columnSort(arr) {
     const newColumn = []
     let missings = 0
+    const animationPromises = [];
+
     for (let i = filedY - 1; i >=0; i--) {
         let item = arr.find(e => e.y === i)
         if (!item) {
             missings++
         } else {
             if (missings > 0) {
-                fallingTyle(item.x, item.y, missings, item.color)
+                animationPromises.push(fallingTyle(item.x, item.y, missings, item.color))
             }
             item.y = i + missings
             newColumn.push(item)
         }
     }
+    await Promise.all(animationPromises);
     newColumn.reverse()
     fillColumn(newColumn)
 }
 
 function fillColumn(newColumn) {
-    for (let i = 0; i < filedY - newColumn.length; i++) {
-        const item = newTile(newColumn[0].x, 0)
-        newColumn.unshift(item)
+    const missingCount = filedY - newColumn.length
+    for (let i = 0; i < missingCount; i++) {
+        const item = newTile(newColumn[0].x, i)
         appearTile(item.x, item.y, item.color)
+        newColumn.unshift(item)
     }
+
+    updateField(newColumn)
+}
+
+function updateField(column) {
+    /*
+    console.log(column)
+    console.log(field)
+    for (let el of field) {
+        if (el.x === column[0].x) {console.log(el)}
+    }
+        */
+    for (let item of column) {
+        for (let tile of field) {
+            if (item.x === tile.x && item.y === tile.y && item.color !== tile.color) {
+                tile.color = item.color
+            }
+        }
+    }
+    //tilesRedraw()
 }
