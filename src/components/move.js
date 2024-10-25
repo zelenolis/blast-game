@@ -1,6 +1,6 @@
 import { fieldPos, remixButtonPos } from '../utils/positions.js'
 import { field } from './game.js'
-import { destroyTiles } from '../visuals/animations.js'
+import { destroyTiles, fallingTyle } from '../visuals/animations.js'
 import { filedX, filedY } from '../constants.js'
 import { arraySubstract } from '../utils/misc.js'
 
@@ -99,6 +99,7 @@ function columnSort(arr) {
         } else {
             if (missings > 0) {
                 console.log(`{tile ${item.y}} became {tile ${i + missings}}`)
+                fallingTyle(item.x, item.y, missings, item.color, field.length)
             }
             item.y = i + missings
             newColumn.push(item)
