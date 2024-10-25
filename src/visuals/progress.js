@@ -1,5 +1,5 @@
-import { getLevel } from "../components/scores.js"
-import { levelPos } from "../utils/positions"
+import { getLevel, getLevelProgress } from "../components/scores.js"
+import { levelPos, currentScorePos } from "../utils/positions"
 import { baseColor } from "../constants"
 
 let currentLevel = 0
@@ -24,7 +24,13 @@ function redrawLevel() {
 }
 
 function redrawProgress() {
-    //
+    const needProgress = 10 * Math.pow(1.5, currentLevel)
+    const progress = getLevelProgress()
+    const coords = currentScorePos()
+    ctx.fillStyle = baseColor
+    ctx.fillRect(coords[0], coords[1], coords[2], coords[3])
+    const text = `next lvl. ${needProgress - progress}`
+    textPrint(text, coords)
 }
 
 function redrawTotalScore() {
