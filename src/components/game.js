@@ -20,7 +20,7 @@ export function fieldInit() {
 }
 
 export function newTile(x, y) {
-    return new Tile(x, y, randomColor())
+    return {x: x, y: y, color: randomColor()}
 }
 
 function randomColor() {
