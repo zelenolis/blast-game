@@ -54,6 +54,7 @@ export function appearTile (x, y, color) {
     const tileImg = new Image()
     tileImg.src = colorMap[color]
     tileImg.onload = function() {
+        ctx.fillStyle = darkColor
         ctx.fillRect(dimensions[0], dimensions[1], dimensions[2], dimensions[2])
         ctx.drawImage(tileImg, dimensions[0], dimensions[1], dimensions[2], dimensions[2])
     }
@@ -121,6 +122,7 @@ async function moveTile(xCoord, yCoord, tileLenght, fallingLenght, color) {
                 if(animateY <= fallingLenght) {
                     requestAnimationFrame(animate)
                 } else {
+                    ctx.fillStyle = darkColor
                     ctx.fillRect(xCoord, yCoord + fallingLenght, tileLenght, tileLenght)
                     ctx.drawImage(tileImg, xCoord, yCoord + fallingLenght, tileLenght, tileLenght)
                     resolve()

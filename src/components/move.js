@@ -3,6 +3,7 @@ import { field, newTile } from './game.js'
 import { destroyTiles, fallingTyle, appearTile } from '../visuals/animations.js'
 import { filedX, filedY } from '../constants.js'
 import { arraySubstract } from '../utils/misc.js'
+import { levelProgressUp } from './scores.js'
 
 
 export function clickChecker(x, y) {
@@ -107,6 +108,7 @@ async function columnSort(arr) {
         }
     }
     await Promise.all(animationPromises);
+    levelProgressUp(missings)
     newColumn.reverse()
     fillColumn(newColumn)
 }
