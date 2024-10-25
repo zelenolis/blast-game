@@ -1,7 +1,18 @@
 export function arraySubstract(arr1, arr2) {
-    return arr1.filter(item1 => 
-        !arr2.some(item2 => 
-            JSON.stringify(item1) === JSON.stringify(item2)
-        )
-    );
+    const newArr = []
+
+    for (let item of arr1) {
+        let isMatch = false;
+        for (let el of arr2) {
+            if (el.x === item.x && el.y === item.y) {
+                isMatch = true;
+                break;
+            }
+        }
+        if (!isMatch) {
+            newArr.push({ ...item })
+        }
+    }
+
+    return newArr
 }
