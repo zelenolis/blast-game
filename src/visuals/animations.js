@@ -49,8 +49,17 @@ export function destroyTiles(arr, fieldLenght) {
     }
 }
 
-export function appearTile(x, y, color) {
-    console.log(x,y)
+export function appearTile (x, y, color) {
+    const dimensions = getCoordsByTylePos(x, y)
+    const tileImg = new Image()
+    tileImg.src = colorMap[color]
+    tileImg.onload = function() {
+        ctx.fillRect(dimensions[0], dimensions[1], dimensions[2], dimensions[2])
+        ctx.drawImage(tileImg, dimensions[0], dimensions[1], dimensions[2], dimensions[2])
+    }
+}
+
+export function appearTile1(x, y, color) {
     const dimensions = getCoordsByTylePos(x, y)
     const tileImg = new Image()
     tileImg.src = colorMap[color]
@@ -76,13 +85,15 @@ export function appearTile(x, y, color) {
     }
 }
 
-export function fallingTyle(x, y, yShift, color) {
+export async function fallingTyle(x, y, yShift, color) {
     const dimensions = getCoordsByTylePos(x, y)
     const xCoord = dimensions[0]
     const yCoord = dimensions[1]
     const tileLenght = dimensions[2]
     const fallingLenght = tileLenght * yShift
-    moveTile(xCoord, yCoord, tileLenght, fallingLenght, color)
+    return moveTile(xCoord, yCoord, tileLenght, fallingLenght, color).then(result => {
+        return result
+    })
 }
 
 function getCoordsByTylePos(x, y) {
@@ -93,26 +104,29 @@ function getCoordsByTylePos(x, y) {
     return [xCoord, yCoord, tileLenght]
 }
 
-function moveTile(xCoord, yCoord, tileLenght, fallingLenght, color) {
-    const tileImg = new Image()
-    tileImg.src = colorMap[color]
-    let animateY = 0
-    const animationspeed = 5
+async function moveTile(xCoord, yCoord, tileLenght, fallingLenght, color) {
+    return new Promise(resolve => {
+        const tileImg = new Image()
+        tileImg.src = colorMap[color]
+        let animateY = 0
+        const animationspeed = 5
 
-    tileImg.onload = function() {
-        function animate() {
-            ctx.fillStyle = darkColor
-            ctx.fillRect(xCoord, yCoord + animateY, tileLenght, tileLenght)
-            ctx.drawImage(tileImg, xCoord, yCoord + animateY, tileLenght, tileLenght)
+        tileImg.onload = function() {
+            function animate() {
+                ctx.fillStyle = darkColor
+                ctx.fillRect(xCoord, yCoord + animateY, tileLenght, tileLenght)
+                ctx.drawImage(tileImg, xCoord, yCoord + animateY, tileLenght, tileLenght)
 
-            animateY += animationspeed
-            if(animateY <= fallingLenght) {
-                requestAnimationFrame(animate)
-            } else {
-                ctx.fillRect(xCoord, yCoord + fallingLenght, tileLenght, tileLenght)
-                ctx.drawImage(tileImg, xCoord, yCoord + fallingLenght, tileLenght, tileLenght)
+                animateY += animationspeed
+                if(animateY <= fallingLenght) {
+                    requestAnimationFrame(animate)
+                } else {
+                    ctx.fillRect(xCoord, yCoord + fallingLenght, tileLenght, tileLenght)
+                    ctx.drawImage(tileImg, xCoord, yCoord + fallingLenght, tileLenght, tileLenght)
+                    resolve()
+                }
             }
+            animate()
         }
-        animate()
-    }
+    })
 }
