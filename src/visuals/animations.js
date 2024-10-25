@@ -64,7 +64,7 @@ export function appearTile1(x, y, color) {
     const tileImg = new Image()
     tileImg.src = colorMap[color]
     let animateY = 0
-    const animationspeed = 5
+    const animationspeed = 8
 
 
     tileImg.onload = function() {
@@ -109,7 +109,7 @@ async function moveTile(xCoord, yCoord, tileLenght, fallingLenght, color) {
         const tileImg = new Image()
         tileImg.src = colorMap[color]
         let animateY = 0
-        const animationspeed = 5
+        const animationspeed = 8
 
         tileImg.onload = function() {
             function animate() {
