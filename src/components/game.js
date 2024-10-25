@@ -19,6 +19,10 @@ export function fieldInit() {
     }
 }
 
+export function newTile(x, y) {
+    return new Tile(x, y, randomColor())
+}
+
 function randomColor() {
     return 1 + Math.floor(Math.random() * colours)
 }
