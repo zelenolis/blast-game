@@ -3,7 +3,6 @@ import { field, newTile } from './game.js'
 import { destroyTiles, fallingTyle, appearTile } from '../visuals/animations.js'
 import { filedX, filedY } from '../constants.js'
 import { arraySubstract } from '../utils/misc.js'
-import { tilesRedraw } from '../visuals/background.js'
 
 
 export function clickChecker(x, y) {
@@ -124,13 +123,6 @@ function fillColumn(newColumn) {
 }
 
 function updateField(column) {
-    /*
-    console.log(column)
-    console.log(field)
-    for (let el of field) {
-        if (el.x === column[0].x) {console.log(el)}
-    }
-        */
     for (let item of column) {
         for (let tile of field) {
             if (item.x === tile.x && item.y === tile.y && item.color !== tile.color) {
@@ -138,5 +130,4 @@ function updateField(column) {
             }
         }
     }
-    //tilesRedraw()
 }
