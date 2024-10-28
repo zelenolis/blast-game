@@ -7,7 +7,8 @@ import { levelProgressUp } from './scores.js'
 import { checkEndGame } from './endgame.js'
 import { getRemixes, decreaseRemixes } from './endgame.js'
 import { remixField } from './game.js'
-import { fieldDraw } from '../visuals/background.js'
+import { tilesRedraw } from '../visuals/background.js'
+import { redrawRemixButton } from '../visuals/progress.js'
 
 
 export function clickChecker(x, y) {
@@ -22,7 +23,8 @@ export function clickChecker(x, y) {
        if (getRemixes() < 1) { return }
        decreaseRemixes()
        remixField()
-       fieldDraw()
+       tilesRedraw()
+       redrawRemixButton()
     }
 }
 

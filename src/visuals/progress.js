@@ -3,6 +3,7 @@ import { levelPos, currentScorePos, totalScorePos, remixButtonPos } from "../uti
 import { baseColor, darkColor } from "../constants.js"
 import { ctx } from "./welcome.js"
 import { textPrint } from "./background.js"
+import { getRemixes } from "../components/endgame.js"
 
 let currentLevel = 0
 
@@ -45,7 +46,7 @@ function redrawTotalScore() {
     ctx.fillStyle = darkColor
 }
 
-export function redrawRemixButton(r) {
+export function redrawRemixButton() {
     const coords = remixButtonPos()
     ctx.strokeStyle  = darkColor
     ctx.fillStyle  = darkColor
@@ -53,7 +54,7 @@ export function redrawRemixButton(r) {
     ctx.roundRect(coords[0], coords[1], coords[2], coords[3], [10])
     ctx.stroke();
     ctx.fill();
-    const text = `remix (${r})`
+    const text = `remix (${getRemixes()})`
 
     textPrint(text, coords)
 }

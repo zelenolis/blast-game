@@ -93,7 +93,6 @@ export function tilesRedraw() {
     const coords = fieldPos()
     ctx.fillStyle = darkColor
     ctx.fillRect(coords[0], coords[1], coords[2], coords[2])
-    console.log(field)
 
     for (let tile of field) {
         tileDraw(tile, coords)

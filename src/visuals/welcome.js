@@ -39,11 +39,11 @@ function startTextDraw() {
         ctx.textAlign = "center"
         ctx.fillText('click to start', canvasW / 2, canvasH - canvasH / 3)
     })
+    resetRemixes()
 }
 
 export function startScreen() {
     clearCanvas()
     startLogoDraw()
     startTextDraw()
-    resetRemixes()
 }
