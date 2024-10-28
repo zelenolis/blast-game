@@ -86,12 +86,12 @@ function clearAndCreate(allITiles) {
         const destroyedTiles = allITiles.filter(item => item.x === i)
         if (destroyedTiles.length > 0) {
             const column = field.filter(tile => tile.x === i)
-            columnSort(arraySubstract(column, destroyedTiles))
+            columnSort(arraySubstract(column, destroyedTiles), i)
         }
     }
 }
 
-async function columnSort(arr) {
+async function columnSort(arr, colX) {
     const newColumn = []
     let missings = 0
     const animationPromises = [];
@@ -111,13 +111,13 @@ async function columnSort(arr) {
     await Promise.all(animationPromises);
     levelProgressUp(missings)
     newColumn.reverse()
-    fillColumn(newColumn)
+    fillColumn(newColumn, colX)
 }
 
-function fillColumn(newColumn) {
+function fillColumn(newColumn, colX) {
     const missingCount = filedY - newColumn.length
     for (let i = 0; i < missingCount; i++) {
-        const item = newTile(newColumn[0].x, i)
+        const item = newTile(colX, i)
         appearTile(item.x, item.y, item.color)
         newColumn.unshift(item)
     }
