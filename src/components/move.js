@@ -4,6 +4,7 @@ import { destroyTiles, fallingTyle, appearTile } from '../visuals/animations.js'
 import { filedX, filedY } from '../constants.js'
 import { arraySubstract } from '../utils/misc.js'
 import { levelProgressUp } from './scores.js'
+import { checkEndGame } from './endgame.js'
 
 
 export function clickChecker(x, y) {
@@ -37,7 +38,7 @@ function findTileArray(x, y) {
     }
 }
 
-function getNeighbors(x, y, color) {
+export function getNeighbors(x, y, color) {
     const matches = []
     const directions = [
         {dx: 1, dy: 0},
@@ -124,7 +125,7 @@ function fillColumn(newColumn) {
     updateField(newColumn)
 }
 
-function updateField(column) {
+async function updateField(column) {
     for (let item of column) {
         for (let tile of field) {
             if (item.x === tile.x && item.y === tile.y && item.color !== tile.color) {
@@ -132,4 +133,5 @@ function updateField(column) {
             }
         }
     }
+    await checkEndGame()
 }
