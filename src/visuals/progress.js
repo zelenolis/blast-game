@@ -1,5 +1,5 @@
 import { getLevel, getLevelProgress, getTotalScores } from "../components/scores.js"
-import { levelPos, currentScorePos, totalScorePos } from "../utils/positions.js"
+import { levelPos, currentScorePos, totalScorePos, remixButtonPos } from "../utils/positions.js"
 import { baseColor, darkColor } from "../constants.js"
 import { ctx } from "./welcome.js"
 import { textPrint } from "./background.js"
@@ -43,4 +43,17 @@ function redrawTotalScore() {
     const text = `scr ${getTotalScores()}`
     textPrint(text, coords)
     ctx.fillStyle = darkColor
+}
+
+export function redrawRemixButton(r) {
+    const coords = remixButtonPos()
+    ctx.strokeStyle  = darkColor
+    ctx.fillStyle  = darkColor
+    ctx.beginPath();
+    ctx.roundRect(coords[0], coords[1], coords[2], coords[3], [10])
+    ctx.stroke();
+    ctx.fill();
+    const text = `remix (${r})`
+
+    textPrint(text, coords)
 }

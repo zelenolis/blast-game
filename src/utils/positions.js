@@ -46,7 +46,7 @@ export function fieldPos() {
 }
 
 export function remixButtonPos() {
-    const padding = 5
+    const padding = 10
     const rectDimension = [
         canvasW * headerThirdPart + padding, 
         canvasH * (headerHeight + fieldHeight) + padding, 

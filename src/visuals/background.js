@@ -11,6 +11,7 @@ import { fieldPos, levelPos, currentScorePos, totalScorePos, remixButtonPos } fr
 import { darkColor, baseColor, lightColor } from "../constants.js";
 import { startFontSize } from "../utils/resize.js";
 import { field } from "../components/game.js";
+import { getRemixes } from '../components/endgame.js'
 
 
 const colorMap = {
@@ -119,7 +120,7 @@ function remixButtonDraw() {
     ctx.roundRect(coords[0], coords[1], coords[2], coords[3], [10])
     ctx.stroke();
     ctx.fill();
-    const text = 'remix'
+    const text = `remix (${getRemixes()})`
 
     textPrint(text, coords)
 }

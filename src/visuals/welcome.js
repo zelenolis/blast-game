@@ -1,6 +1,7 @@
 import Pumpkin from '../assets/pumpkin.png'
 import { startLogoSize, startFontSize } from '../utils/resize.js'
 import { baseColor, darkColor } from '../constants.js'
+import { resetRemixes } from '../components/endgame.js'
 
 
 const container = document.getElementById('container')
@@ -44,4 +45,5 @@ export function startScreen() {
     clearCanvas()
     startLogoDraw()
     startTextDraw()
+    resetRemixes()
 }

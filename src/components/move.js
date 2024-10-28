@@ -5,6 +5,9 @@ import { filedX, filedY } from '../constants.js'
 import { arraySubstract } from '../utils/misc.js'
 import { levelProgressUp } from './scores.js'
 import { checkEndGame } from './endgame.js'
+import { getRemixes, decreaseRemixes } from './endgame.js'
+import { remixField } from './game.js'
+import { fieldDraw } from '../visuals/background.js'
 
 
 export function clickChecker(x, y) {
@@ -16,7 +19,10 @@ export function clickChecker(x, y) {
     }
 
     if (x > mix[0] && x < mix[0] + mix[2] && y > mix[1] && y < mix[1] + mix[3]) {
-        console.log('Remix!')
+       if (getRemixes() < 1) { return }
+       decreaseRemixes()
+       remixField()
+       fieldDraw()
     }
 }
 

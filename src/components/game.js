@@ -32,9 +32,11 @@ export function remixField() {
     const allColors = field.map(item => item.color);
     for (let i = allColors.length - 1; i > 0; i --) {
         const j = Math.floor(Math.random() * (i + 1))
-        [allColors[i], allColors[j]] = [allColors[j], allColors[i]];
+        const temp = allColors[i]
+        allColors[i] = allColors[j]
+        allColors[j] = temp
     }
-    field.forEach((item, index => {
+    field.forEach((item, index) => {
         item.color = allColors[index]
-    }))
+    })
 }
