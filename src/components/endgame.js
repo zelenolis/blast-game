@@ -2,14 +2,18 @@ import { remixField } from "./game.js";
 import { remixes } from "../constants.js";
 import { getNeighbors } from "./move.js";
 import { field } from "./game.js";
+import { redrawRemixButton } from "../visuals/progress.js";
 
 let remixRemains = 0
 
 export function resetRemixes() {
     remixRemains = remixes
 }
+export function getRemixes() {
+    return remixRemains
+}
 
-function decreaseRemixes() {
+export function decreaseRemixes() {
     remixRemains -= 1
 }
 
