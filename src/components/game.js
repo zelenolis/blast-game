@@ -26,3 +26,15 @@ export function newTile(x, y) {
 function randomColor() {
     return 1 + Math.floor(Math.random() * colours)
 }
+
+
+export function remixField() {
+    const allColors = field.map(item => item.color);
+    for (let i = allColors.length - 1; i > 0; i --) {
+        const j = Math.floor(Math.random() * (i + 1))
+        [allColors[i], allColors[j]] = [allColors[j], allColors[i]];
+    }
+    field.forEach((item, index => {
+        item.color = allColors[index]
+    }))
+}
