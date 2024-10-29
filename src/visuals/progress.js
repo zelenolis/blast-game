@@ -52,7 +52,6 @@ function drawBar(coords, progress, needProgress) {
 
             lastProgress += animationSpeed
             if (lastProgress < progress) {
-                console.log('sycle')
                 requestAnimationFrame(animate)
             } else {
                 lastProgress = progress
