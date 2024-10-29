@@ -1,7 +1,7 @@
 import { getLevel, getTotalScores } from "../components/scores.js"
 import { levelPos, currentScorePos, totalScorePos, remixButtonPos, fieldPos } from "../utils/positions.js"
-import { lightColor, baseColor, darkColor, progressBarcolor, alertColor } from "../constants.js"
-import { ctx } from "./welcome.js"
+import { lightColor, baseColor, darkColor, progressBarcolor } from "../constants.js"
+import { ctx, canvasW, canvasH } from "./welcome.js"
 import { textPrint } from "./background.js"
 import { getRemixes } from "../components/endgame.js"
 
@@ -87,9 +87,11 @@ export function redrawRemixButton(backColor = darkColor, textColor = lightColor)
 }
 
 export function gameOverDraw() {
-    const coords = fieldPos()
-    ctx.fillStyle = baseColor
+    const coords = [0, 0, canvasW, canvasH]
+    ctx.globalAlpha = 0.5
+    ctx.fillStyle = darkColor
     ctx.fillRect(coords[0], coords[1], coords[2], coords[3])
     const text = `GAME OVER`
-    textPrint(text, coords, alertColor)
+    textPrint(text, coords, lightColor)
+    ctx.globalAlpha = 1
 }

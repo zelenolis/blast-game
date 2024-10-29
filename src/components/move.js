@@ -122,11 +122,11 @@ async function columnSort(arr, colX) {
     fillColumn(newColumn, colX)
 }
 
-function fillColumn(newColumn, colX) {
+async function fillColumn(newColumn, colX) {
     const missingCount = filedY - newColumn.length
     for (let i = 0; i < missingCount; i++) {
         const item = newTile(colX, i)
-        appearTile(item.x, item.y, item.color)
+        await appearTile(item.x, item.y, item.color)
         newColumn.unshift(item)
     }
 
