@@ -30,3 +30,7 @@ function clickCoords(e) {
     const y = e.clientY - rect.top
     clickChecker(x, y)
 }
+
+export function gamestart() {
+    gameStatus = 'init'
+}
