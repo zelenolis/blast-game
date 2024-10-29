@@ -22,12 +22,14 @@ export function getTotalScores() {
 }
 
 export function levelProgressUp(n) {
-    levelProgress += n
-    totalScores += n
+    return new Promise(resolve => {
+        levelProgress += n
+        totalScores += n
 
-    checkNextLevel(level, levelProgress)
-
-    updateScores()
+        checkNextLevel(level, levelProgress)
+        updateScores()
+        resolve()
+    })
 }
 
 function checkNextLevel(currentLevel, currentProgress) {
