@@ -20,18 +20,17 @@ export function decreaseRemixes() {
 
 export function checkEndGame() {
     return new Promise(resolve => {
-        for (let tile of field) {
-            const endMove = getNeighbors(tile.x, tile.y, tile.color)
-            if (endMove[0]) {
+        for (let i = 0; i < field.length; i++) {
+            if (getNeighbors(field[i].x, field[i].y, field[i].color).length > 0) {
+                resolve(false)
                 return
             }
         }
-        if (remixRemains === 0) {
+        if (remixRemains < 1) {
             resolve(true)
         } else {
             redrawRemixButton(progressBarcolor, alertColor)
             resolve(false)
         }
     })
-    
 }

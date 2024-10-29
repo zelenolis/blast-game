@@ -98,7 +98,7 @@ async function clearAndCreate(allITiles) {
             await columnSort(arraySubstract(column, destroyedTiles), i)
         }
     }
-    await checkEndGame()
+    await checkForEnd()
 }
 
 async function columnSort(arr, colX) {
@@ -121,7 +121,7 @@ async function columnSort(arr, colX) {
     await Promise.all(animationPromises)
     await levelProgressUp(missings)
     newColumn.reverse()
-    fillColumn(newColumn, colX)
+    await fillColumn(newColumn, colX)
 }
 
 async function fillColumn(newColumn, colX) {
@@ -131,23 +131,26 @@ async function fillColumn(newColumn, colX) {
         await appearTile(item.x, item.y, item.color)
         newColumn.unshift(item)
     }
-    updateField(newColumn)
+    await updateField(newColumn)
 }
 
 function updateField(column) {
-    for (let item of column) {
-        for (let tile of field) {
-            if (item.x === tile.x && item.y === tile.y && item.color !== tile.color) {
-                tile.color = item.color
+    return new Promise(resolve => {
+        for (let item of column) {
+            for (let tile of field) {
+                if (item.x === tile.x && item.y === tile.y && item.color !== tile.color) {
+                    tile.color = item.color
+                }
             }
         }
-    }
+        resolve()
+    })
+    
 }
 
 async function checkForEnd() {
     const end = await checkEndGame()
     if (end) {
-        console.log('Game Over')
         gameOverDraw()
         gamestart()
         fieldInit()
