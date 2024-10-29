@@ -50,14 +50,18 @@ export function destroyTiles(arr, fieldLenght) {
 }
 
 export function appearTile (x, y, color) {
-    const dimensions = getCoordsByTylePos(x, y)
-    const tileImg = new Image()
-    tileImg.src = colorMap[color]
-    tileImg.onload = function() {
-        ctx.fillStyle = darkColor
-        ctx.fillRect(dimensions[0], dimensions[1], dimensions[2], dimensions[2])
-        ctx.drawImage(tileImg, dimensions[0], dimensions[1], dimensions[2], dimensions[2])
-    }
+    return new Promise(resolve => {
+        const dimensions = getCoordsByTylePos(x, y)
+        const tileImg = new Image()
+        tileImg.src = colorMap[color]
+        tileImg.onload = function() {
+            ctx.fillStyle = darkColor
+            ctx.fillRect(dimensions[0], dimensions[1], dimensions[2], dimensions[2])
+            ctx.drawImage(tileImg, dimensions[0], dimensions[1], dimensions[2], dimensions[2])
+            resolve()
+        }
+    })
+    
 }
 
 export function appearTile1(x, y, color) {
