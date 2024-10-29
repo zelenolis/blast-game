@@ -51,7 +51,7 @@ export async function destroyTiles(arr, fieldLenght) {
     await Promise.all(animationPromises);
 }
 
-export function appearTile (x, y, color) {
+export function appearTile(x, y, color) {
     return new Promise(resolve => {
         const dimensions = getCoordsByTylePos(x, y)
         const tileImg = new Image()

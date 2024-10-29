@@ -117,7 +117,7 @@ async function columnSort(arr, colX) {
             newColumn.push(item)
         }
     }
-    await Promise.all(animationPromises);
+    await Promise.all(animationPromises)
     await levelProgressUp(missings)
     newColumn.reverse()
     fillColumn(newColumn, colX)
