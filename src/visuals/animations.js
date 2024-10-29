@@ -25,15 +25,15 @@ const colorMap = {
 }
 
 function tileDestroy(x, y, length) {
-
-    clearTyle(x, y, length)
-
-    const animationImage = new Image()
-    animationImage.src = Ghost
-
-    animationImage.onload = function() {
-        ctx.drawImage(animationImage, x, y, length, length)
-    }
+    return new Promise(resolve => {
+        clearTyle(x, y, length)
+        const animationImage = new Image()
+        animationImage.src = Ghost
+        animationImage.onload = function() {
+            ctx.drawImage(animationImage, x, y, length, length)
+            resolve()
+        }
+    })
 }
 
 function clearTyle(x, y, length) {
@@ -41,12 +41,14 @@ function clearTyle(x, y, length) {
     ctx.fillRect(x, y, length, length)
 }
 
-export function destroyTiles(arr, fieldLenght) {
+export async function destroyTiles(arr, fieldLenght) {
+    const animationPromises = [];
     const frame = fieldPos()
     const tileLenght = frame[2] / Math.sqrt(fieldLenght)
     for (let item of arr) {
-        tileDestroy((item.x * tileLenght + frame[0]), (item.y * tileLenght + frame[1]), tileLenght)
+        animationPromises.push(tileDestroy((item.x * tileLenght + frame[0]), (item.y * tileLenght + frame[1]), tileLenght))
     }
+    await Promise.all(animationPromises);
 }
 
 export function appearTile (x, y, color) {

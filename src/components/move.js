@@ -66,7 +66,7 @@ export function getNeighbors(x, y, color) {
     return matches
 }
 
-function getAllConnectedTiles(x, y) {
+async function getAllConnectedTiles(x, y) {
     const startTile = field.find(tile => tile.x === x && tile.y === y)
     if (!startTile) { return }
 
@@ -86,8 +86,8 @@ function getAllConnectedTiles(x, y) {
             }
         }
     }
+    await destroyTiles(allITiles, field.length)
     clearAndCreate(allITiles)
-    destroyTiles(allITiles, field.length)
 }
 
 function clearAndCreate(allITiles) {
