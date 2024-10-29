@@ -25,15 +25,15 @@ export function levelProgressUp(n) {
     return new Promise(resolve => {
         levelProgress += n
         totalScores += n
+        const needProgress = Math.floor(10 * Math.pow(1.5, level))
 
-        checkNextLevel(level, levelProgress)
-        updateScores()
+        checkNextLevel(needProgress, levelProgress)
+        updateScores(levelProgress, needProgress)
         resolve()
     })
 }
 
-function checkNextLevel(currentLevel, currentProgress) {
-    const needProgress = Math.floor(10 * Math.pow(1.5, currentLevel))
+function checkNextLevel(needProgress, currentProgress) {
     if (currentProgress >= needProgress) {
         levelup()
     }
