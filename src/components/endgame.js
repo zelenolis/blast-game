@@ -27,7 +27,6 @@ export function checkEndGame() {
             }
         }
         redrawRemixButton(progressBarcolor, alertColor)
-        console.log('endgame')
         resolve()
     })
     
