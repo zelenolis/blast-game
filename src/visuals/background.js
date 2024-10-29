@@ -57,12 +57,12 @@ function levelDraw() {
 
 function currentScoreDraw() {
     const coords = currentScorePos()
-    ctx.fillStyle = baseColor
-    ctx.fillRect(coords[0], coords[1], coords[2], coords[3])
-
-    const text = 'next lvl. 10'
-
-    textPrint(text, coords)
+    ctx.fillStyle = darkColor
+    ctx.strokeStyle  = darkColor
+    ctx.beginPath();
+    ctx.roundRect(coords[0], coords[1], coords[2], coords[3], [10])
+    ctx.stroke();
+    ctx.fill();
 }
 
 function totalScoreDraw() {

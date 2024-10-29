@@ -11,11 +11,12 @@ export function levelPos() {
 }
 
 export function currentScorePos() {
+    const padding = 10
     const rectDimension = [
-        canvasW * headerThirdPart, 
-        0, 
-        canvasW - 2 * canvasW * headerThirdPart, 
-        canvasH * footerHeight]
+        canvasW * headerThirdPart + padding, 
+        0 + 3 * padding, 
+        canvasW - 2 * canvasW * headerThirdPart - 2 * padding, 
+        canvasH * footerHeight - 6 * padding]
     return rectDimension
 }
 
