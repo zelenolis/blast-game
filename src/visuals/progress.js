@@ -6,11 +6,13 @@ import { textPrint } from "./background.js"
 import { getRemixes } from "../components/endgame.js"
 
 let currentLevel = 0
+let lastProgress = 0
 
 export function updateScores(levelProgress, needProgress) {
     const checkedLevel = getLevel()
     if (checkedLevel > currentLevel) {
         currentLevel = checkedLevel
+        lastProgress = 0
         redrawLevel()
     }
     redrawProgress(levelProgress, needProgress)
@@ -26,7 +28,7 @@ function redrawLevel() {
     ctx.fillStyle = darkColor
 }
 
-function redrawProgress(progress, needProgress) {
+async function redrawProgress (progress, needProgress) {
     const coords = currentScorePos()
     ctx.fillStyle = darkColor
     ctx.strokeStyle  = darkColor
@@ -34,13 +36,33 @@ function redrawProgress(progress, needProgress) {
     ctx.roundRect(coords[0], coords[1], coords[2], coords[3], [10])
     ctx.stroke();
     ctx.fill();
-    const percent = progress / needProgress
-    ctx.fillStyle = progressBarcolor
-    ctx.strokeStyle  = progressBarcolor
-    ctx.beginPath();
-    ctx.roundRect(coords[0], coords[1], coords[2] * percent, coords[3] , [10])
-    ctx.fill();
+
+    await drawBar(coords, progress, needProgress)
 }
+
+function drawBar(coords, progress, needProgress) {
+    const animationSpeed = 1
+    return new Promise(resolve => {
+        function animate() {
+            ctx.fillStyle = progressBarcolor
+            ctx.strokeStyle  = progressBarcolor
+            ctx.beginPath();
+            ctx.roundRect(coords[0], coords[1], coords[2] * (lastProgress / needProgress), coords[3] , [10])
+            ctx.fill();
+
+            lastProgress += animationSpeed
+            if (lastProgress < progress) {
+                console.log('sycle')
+                requestAnimationFrame(animate)
+            } else {
+                lastProgress = progress
+            }
+        }
+        animate()
+    })
+}
+
+
 
 function redrawTotalScore() {
     const coords = totalScorePos()
