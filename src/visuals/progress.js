@@ -1,6 +1,6 @@
 import { getLevel, getTotalScores } from "../components/scores.js"
 import { levelPos, currentScorePos, totalScorePos, remixButtonPos } from "../utils/positions.js"
-import { baseColor, darkColor } from "../constants.js"
+import { baseColor, darkColor, progressBarcolor } from "../constants.js"
 import { ctx } from "./welcome.js"
 import { textPrint } from "./background.js"
 import { getRemixes } from "../components/endgame.js"
@@ -35,8 +35,8 @@ function redrawProgress(progress, needProgress) {
     ctx.stroke();
     ctx.fill();
     const percent = progress / needProgress
-    ctx.fillStyle = 'green'
-    ctx.strokeStyle  = 'green'
+    ctx.fillStyle = progressBarcolor
+    ctx.strokeStyle  = progressBarcolor
     ctx.beginPath();
     ctx.roundRect(coords[0], coords[1], coords[2] * percent, coords[3] , [10])
     ctx.fill();

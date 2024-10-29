@@ -1,6 +1,7 @@
 export const darkColor = '#292c33'
 export const lightColor = 'white'
 export const baseColor = '#C76E00'
+export const progressBarcolor = '#31b53a'
 
 // Field size X * Y
 export const filedX = 3
