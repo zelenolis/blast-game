@@ -3,6 +3,7 @@ import { remixes } from "../constants.js";
 import { getNeighbors } from "./move.js";
 import { field } from "./game.js";
 import { redrawRemixButton } from "../visuals/progress.js";
+import { alertColor, progressBarcolor } from "../constants.js";
 
 let remixRemains = 0
 
@@ -25,6 +26,7 @@ export function checkEndGame() {
                 return
             }
         }
+        redrawRemixButton(progressBarcolor, alertColor)
         console.log('endgame')
         resolve()
     })

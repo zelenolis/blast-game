@@ -26,7 +26,7 @@ const colorMap = {
 }
 
 
-export function textPrint(txt, coords) {
+export function textPrint(txt, coords, textColor = lightColor) {
     document.fonts.load('10pt "Scary"').then(() => {
         const textHeight = startFontSize(canvasW) / 1.5
         ctx.font = `${textHeight}px Scary`
@@ -39,7 +39,7 @@ export function textPrint(txt, coords) {
 
         ctx.textAlign = "start"
         ctx.textBaseline = 'bottom';
-        ctx.fillStyle = lightColor
+        ctx.fillStyle = textColor
         ctx.fillText(txt, textX, textY)
     })
 }
