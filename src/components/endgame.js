@@ -26,8 +26,12 @@ export function checkEndGame() {
                 return
             }
         }
-        redrawRemixButton(progressBarcolor, alertColor)
-        resolve()
+        if (remixRemains === 0) {
+            resolve(true)
+        } else {
+            redrawRemixButton(progressBarcolor, alertColor)
+            resolve(false)
+        }
     })
     
 }

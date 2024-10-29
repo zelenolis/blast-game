@@ -141,5 +141,8 @@ async function updateField(column) {
             }
         }
     }
-    await checkEndGame()
+    const end = await checkEndGame()
+    if (end) {
+        console.log('Game Over')
+    }
 }
