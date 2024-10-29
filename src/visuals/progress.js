@@ -1,6 +1,6 @@
 import { getLevel, getTotalScores } from "../components/scores.js"
-import { levelPos, currentScorePos, totalScorePos, remixButtonPos } from "../utils/positions.js"
-import { lightColor, baseColor, darkColor, progressBarcolor } from "../constants.js"
+import { levelPos, currentScorePos, totalScorePos, remixButtonPos, fieldPos } from "../utils/positions.js"
+import { lightColor, baseColor, darkColor, progressBarcolor, alertColor } from "../constants.js"
 import { ctx } from "./welcome.js"
 import { textPrint } from "./background.js"
 import { getRemixes } from "../components/endgame.js"
@@ -55,6 +55,7 @@ function drawBar(coords, progress, needProgress) {
                 requestAnimationFrame(animate)
             } else {
                 lastProgress = progress
+                resolve()
             }
         }
         animate()
@@ -83,4 +84,12 @@ export function redrawRemixButton(backColor = darkColor, textColor = lightColor)
     const text = `remix (${getRemixes()})`
 
     textPrint(text, coords, textColor)
+}
+
+export function gameOverDraw() {
+    const coords = fieldPos()
+    ctx.fillStyle = baseColor
+    ctx.fillRect(coords[0], coords[1], coords[2], coords[3])
+    const text = `GAME OVER`
+    textPrint(text, coords, alertColor)
 }

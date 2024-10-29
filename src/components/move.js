@@ -8,7 +8,7 @@ import { checkEndGame } from './endgame.js'
 import { getRemixes, decreaseRemixes } from './endgame.js'
 import { remixField } from './game.js'
 import { tilesRedraw } from '../visuals/background.js'
-import { redrawRemixButton } from '../visuals/progress.js'
+import { redrawRemixButton, gameOverDraw } from '../visuals/progress.js'
 
 
 export function clickChecker(x, y) {
@@ -144,5 +144,6 @@ async function updateField(column) {
     const end = await checkEndGame()
     if (end) {
         console.log('Game Over')
+        gameOverDraw()
     }
 }
