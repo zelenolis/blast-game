@@ -63,7 +63,6 @@ export function appearTile(x, y, color) {
             resolve()
         }
     })
-    
 }
 
 export function appearTile1(x, y, color) {
@@ -92,15 +91,13 @@ export function appearTile1(x, y, color) {
     }
 }
 
-export async function fallingTyle(x, y, yShift, color) {
+export function fallingTile(x, y, yShift, color) {
     const dimensions = getCoordsByTylePos(x, y)
     const xCoord = dimensions[0]
     const yCoord = dimensions[1]
     const tileLenght = dimensions[2]
     const fallingLenght = tileLenght * yShift
-    return moveTile(xCoord, yCoord, tileLenght, fallingLenght, color).then(result => {
-        return result
-    })
+    return moveTile(xCoord, yCoord, tileLenght, fallingLenght, color)
 }
 
 function getCoordsByTylePos(x, y) {

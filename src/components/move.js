@@ -1,6 +1,6 @@
 import { fieldPos, remixButtonPos } from '../utils/positions.js'
 import { field, newTile } from './game.js'
-import { destroyTiles, fallingTyle, appearTile } from '../visuals/animations.js'
+import { destroyTiles, fallingTile, appearTile } from '../visuals/animations.js'
 import { filedX, filedY } from '../constants.js'
 import { arraySubstract } from '../utils/misc.js'
 import { levelProgressUp } from './scores.js'
@@ -90,14 +90,15 @@ async function getAllConnectedTiles(x, y) {
     clearAndCreate(allITiles)
 }
 
-function clearAndCreate(allITiles) {
+async function clearAndCreate(allITiles) {
     for (let i = 0; i < filedX; i++) {
         const destroyedTiles = allITiles.filter(item => item.x === i)
         if (destroyedTiles.length > 0) {
             const column = field.filter(tile => tile.x === i)
-            columnSort(arraySubstract(column, destroyedTiles), i)
+            await columnSort(arraySubstract(column, destroyedTiles), i)
         }
     }
+    await checkEndGame()
 }
 
 async function columnSort(arr, colX) {
@@ -111,7 +112,7 @@ async function columnSort(arr, colX) {
             missings++
         } else {
             if (missings > 0) {
-                animationPromises.push(fallingTyle(item.x, item.y, missings, item.color))
+                animationPromises.push(fallingTile(item.x, item.y, missings, item.color))
             }
             item.y = i + missings
             newColumn.push(item)
@@ -130,11 +131,10 @@ async function fillColumn(newColumn, colX) {
         await appearTile(item.x, item.y, item.color)
         newColumn.unshift(item)
     }
-
     updateField(newColumn)
 }
 
-async function updateField(column) {
+function updateField(column) {
     for (let item of column) {
         for (let tile of field) {
             if (item.x === tile.x && item.y === tile.y && item.color !== tile.color) {
@@ -142,6 +142,9 @@ async function updateField(column) {
             }
         }
     }
+}
+
+async function checkForEnd() {
     const end = await checkEndGame()
     if (end) {
         console.log('Game Over')
