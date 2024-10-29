@@ -95,3 +95,8 @@ export function gameOverDraw() {
     textPrint(text, coords, lightColor)
     ctx.globalAlpha = 1
 }
+
+export function resetLevel() {
+    currentLevel = 0
+    lastProgress = 0
+}

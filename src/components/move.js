@@ -5,10 +5,11 @@ import { filedX, filedY } from '../constants.js'
 import { arraySubstract } from '../utils/misc.js'
 import { levelProgressUp } from './scores.js'
 import { checkEndGame } from './endgame.js'
-import { getRemixes, decreaseRemixes } from './endgame.js'
-import { remixField } from './game.js'
+import { getRemixes, decreaseRemixes, resetRemixes } from './endgame.js'
+import { remixField, fieldInit } from './game.js'
 import { tilesRedraw } from '../visuals/background.js'
-import { redrawRemixButton, gameOverDraw } from '../visuals/progress.js'
+import { redrawRemixButton, gameOverDraw, resetLevel } from '../visuals/progress.js'
+import { gamestart } from '../main.js'
 
 
 export function clickChecker(x, y) {
@@ -145,5 +146,9 @@ async function updateField(column) {
     if (end) {
         console.log('Game Over')
         gameOverDraw()
+        gamestart()
+        fieldInit()
+        resetLevel()
+        resetRemixes()
     }
 }
