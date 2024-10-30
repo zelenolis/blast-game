@@ -1,4 +1,4 @@
-import { fieldPos, remixButtonPos } from '../utils/positions.js'
+import { fieldPos, remixButtonPos, ingameAudioPos } from '../utils/positions.js'
 import { field, newTile } from './game.js'
 import { destroyTiles, fallingTile, appearTile } from '../visuals/animations.js'
 import { filedX, filedY, alertColor, progressBarcolor } from '../constants.js'
@@ -7,15 +7,22 @@ import { levelProgressUp } from './scores.js'
 import { checkEndGame, checkEnd } from './endgame.js'
 import { getRemixes, decreaseRemixes, resetRemixes } from './endgame.js'
 import { remixField, fieldInit } from './game.js'
-import { tilesRedraw } from '../visuals/background.js'
+import { tilesRedraw, switchAudioBox } from '../visuals/background.js'
 import { redrawRemixButton, gameOverDraw, resetLevel } from '../visuals/progress.js'
 import { gamestart } from '../main.js'
-import { playClick, playMiss } from '../utils/audio.js'
+import { playClick, playMiss, soundOn } from '../utils/audio.js'
 
 
 export function clickChecker(x, y) {
     const frame = fieldPos()
     const mix = remixButtonPos()
+    const audioOn = ingameAudioPos()
+    audioOn[0] += audioOn[3] / 2
+
+    if (x > audioOn[0] && x < audioOn[0] + audioOn[2] && y > audioOn[1] && y < audioOn[1] + audioOn[2]) {
+        soundOn()
+        switchAudioBox()
+    }
 
     if (x > frame[0] && x < frame[0] + frame[2] && y > frame[1] && y < frame[1] + frame[2]) {
         findTileCoords(x, y, frame)
