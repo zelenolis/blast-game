@@ -8,18 +8,34 @@ const clickSound = new Audio(Click)
 const missSound = new Audio(Miss)
 const startSound = new Audio(Start)
 
+let soundIsOn = false
+
 export function playPop() {
-    popSound.play()
+    if (soundIsOn) {
+        popSound.play()
+    }
 }
 
 export function playClick() {
-    clickSound.play()
+    if (soundIsOn) {
+        clickSound.play()
+    }
 }
 
 export function playMiss() {
-    missSound.play()
+    if (soundIsOn) {
+        missSound.play()
+    }    
 }
 
 export async function playStart() {
+    if (soundIsOn) {
+        startSound.play();
+    }
+}
+
+export async function playStartStop() {
     startSound.play();
+    startSound.pause();
+    startSound.currentTime = 0;
 }
