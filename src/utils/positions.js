@@ -8,10 +8,19 @@ const headerThirdPart = 0.3
 
 export function checkboxDrawPos() {
     const height = startFontSize(canvasW) * 0.7
-    const padding = 10
     const rectDimension = [
         0 + height, 
         0 + height, 
+        height, 
+        height]
+    return rectDimension
+}
+
+export function ingameAudioPos() {
+    const height = startFontSize(canvasW) * 0.7
+    const rectDimension = [
+        canvasH - 2 * height, 
+        canvasH - 2 * height, 
         height, 
         height]
     return rectDimension
