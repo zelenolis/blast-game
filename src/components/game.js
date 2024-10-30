@@ -1,4 +1,5 @@
 import { filedX, filedY, colours } from '../constants.js'
+import { checkEnd } from './endgame.js';
 
 export const field = [];
 
@@ -11,12 +12,14 @@ class Tile {
 }
 
 export function fieldInit() {
-    field.length = 0;
-    for (let i = 0; i < filedX; i++) {
-        for (let j = 0; j < filedY; j++) {
-            field.push(new Tile(i, j, randomColor()))
+    do {
+        field.length = 0;
+        for (let i = 0; i < filedX; i++) {
+            for (let j = 0; j < filedY; j++) {
+                field.push(new Tile(i, j, randomColor()))
+            }
         }
-    }
+    } while (checkEnd()) 
 }
 
 export function newTile(x, y) {

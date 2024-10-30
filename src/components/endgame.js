@@ -17,6 +17,15 @@ export function decreaseRemixes() {
     remixRemains -= 1
 }
 
+export function checkEnd() {
+    for (let i = 0; i < field.length; i++) {
+        if (getNeighbors(field[i].x, field[i].y, field[i].color).length > 0) {
+            return false
+        }
+    }
+    return true
+}
+
 export function checkEndGame() {
     return new Promise(resolve => {
         for (let i = 0; i < field.length; i++) {
