@@ -1,4 +1,3 @@
-import { remixField } from "./game.js";
 import { remixes } from "../constants.js";
 import { getNeighbors } from "./move.js";
 import { field } from "./game.js";
