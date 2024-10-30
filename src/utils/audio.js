@@ -30,14 +30,13 @@ export function playMiss() {
 
 export async function playStart() {
     if (soundIsOn) {
-        startSound.play();
+        startSound.play()
         startSound.loop = true
     }
 }
 
 export async function playStartStop() {
-    startSound.play();
-    startSound.pause();
+    startSound.pause()
     startSound.currentTime = 0;
 }
 
