@@ -3,6 +3,7 @@ import { startFontSize } from '../utils/resize.js'
 import { baseColor, darkColor, lightColor } from '../constants.js'
 import { resetRemixes } from '../components/endgame.js'
 import { checkboxDrawPos } from '../utils/positions.js'
+import { getSound } from '../utils/audio.js'
 
 
 const container = document.getElementById('container')
@@ -43,11 +44,17 @@ function startTextDraw() {
     resetRemixes()
 }
 
-function checkboxDraw() {
-    const coords = checkboxDrawPos()
-    ctx.strokeStyle  = lightColor
-    ctx.lineWidth = 3
+function clearRect(coords) {
     ctx.fillStyle = darkColor
+    ctx.fillRect(coords[0], coords[1], coords[2], coords[3], [10])
+}
+
+export function checkboxDraw() {
+    const coords = checkboxDrawPos()
+    clearRect(coords)
+    ctx.strokeStyle  = getSound() ? darkColor : lightColor
+    ctx.lineWidth = 3
+    ctx.fillStyle = getSound() ? lightColor : darkColor
     ctx.beginPath()
     ctx.roundRect(coords[0], coords[1], coords[2], coords[3], [10])
     ctx.stroke()
