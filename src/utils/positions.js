@@ -19,9 +19,9 @@ export function checkboxDrawPos() {
 export function ingameAudioPos() {
     const height = startFontSize(canvasW) * 0.7
     const rectDimension = [
+        0,
         canvasH - 2 * height, 
-        canvasH - 2 * height, 
-        height, 
+        canvasW * headerThirdPart, 
         height]
     return rectDimension
 }
