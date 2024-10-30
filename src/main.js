@@ -4,6 +4,12 @@ import { fieldDraw } from './visuals/background.js'
 import { fieldInit } from './components/game.js'
 import { clickChecker } from './components/move.js'
 
+//remove loader
+window.addEventListener('load', function() {
+    const loadingMessage = document.getElementById('loading-message')
+    loadingMessage.remove()
+})
+
 // game status: init - start screen, game - game is on
 let gameStatus = 'init'
 
