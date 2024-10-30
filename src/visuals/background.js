@@ -7,11 +7,12 @@ import Color6 from '../assets/set/6.png'
 import Color7 from '../assets/set/7.png'
 import Color8 from '../assets/set/8.png'
 import { ctx, canvasW } from "./welcome.js";
-import { fieldPos, levelPos, currentScorePos, totalScorePos, remixButtonPos } from "../utils/positions.js";
+import { fieldPos, levelPos, currentScorePos, totalScorePos, remixButtonPos, ingameAudioPos } from "../utils/positions.js";
 import { darkColor, baseColor, lightColor } from "../constants.js";
 import { startFontSize } from "../utils/resize.js";
 import { field } from "../components/game.js";
 import { getRemixes } from '../components/endgame.js'
+import { getSound } from '../utils/audio.js'
 
 
 const colorMap = {
@@ -83,6 +84,7 @@ export function fieldDraw() {
     currentScoreDraw()
     totalScoreDraw()
     remixButtonDraw()
+    switchAudio()
 
     for (let tile of field) {
         tileDraw(tile, coords)
@@ -122,4 +124,23 @@ function remixButtonDraw() {
     const text = `remix (${getRemixes()})`
 
     textPrint(text, coords)
+}
+
+function switchAudio() {
+    const coords = ingameAudioPos()
+    const text = `Sound`
+    coords[1] += 6
+    textPrint(text, coords)
+    switchAudioBox()
+}
+
+export function switchAudioBox() {
+    const coords = ingameAudioPos()
+    ctx.strokeStyle  = getSound() ? baseColor : darkColor
+    ctx.lineWidth = 3
+    ctx.fillStyle = getSound() ? darkColor : baseColor
+    ctx.beginPath()
+    ctx.roundRect(coords[0] + coords[3] / 2, coords[1], coords[3], coords[3], [10])
+    ctx.stroke()
+    ctx.fill()
 }
