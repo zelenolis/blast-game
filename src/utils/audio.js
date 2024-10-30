@@ -4,9 +4,13 @@ import Miss from '../assets/miss.mp3'
 import Start from '../assets/Halloween-song.mp3'
 
 const popSound = new Audio(Pop)
+popSound.volume = 0.5
 const clickSound = new Audio(Click)
+clickSound.volume = 0.5
 const missSound = new Audio(Miss)
+missSound.volume = 0.5
 const startSound = new Audio(Start)
+startSound.volume = 0.5
 
 let soundIsOn = false
 
