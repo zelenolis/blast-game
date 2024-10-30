@@ -115,10 +115,10 @@ function remixButtonDraw() {
     const coords = remixButtonPos()
     ctx.strokeStyle  = darkColor
     ctx.fillStyle  = darkColor
-    ctx.beginPath();
+    ctx.beginPath()
     ctx.roundRect(coords[0], coords[1], coords[2], coords[3], [10])
-    ctx.stroke();
-    ctx.fill();
+    ctx.stroke()
+    ctx.fill()
     const text = `remix (${getRemixes()})`
 
     textPrint(text, coords)
