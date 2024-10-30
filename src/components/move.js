@@ -1,10 +1,10 @@
 import { fieldPos, remixButtonPos } from '../utils/positions.js'
 import { field, newTile } from './game.js'
 import { destroyTiles, fallingTile, appearTile } from '../visuals/animations.js'
-import { filedX, filedY } from '../constants.js'
+import { filedX, filedY, alertColor, progressBarcolor } from '../constants.js'
 import { arraySubstract } from '../utils/misc.js'
 import { levelProgressUp } from './scores.js'
-import { checkEndGame } from './endgame.js'
+import { checkEndGame, checkEnd } from './endgame.js'
 import { getRemixes, decreaseRemixes, resetRemixes } from './endgame.js'
 import { remixField, fieldInit } from './game.js'
 import { tilesRedraw } from '../visuals/background.js'
@@ -26,7 +26,15 @@ export function clickChecker(x, y) {
        decreaseRemixes()
        remixField()
        tilesRedraw()
-       redrawRemixButton()
+       checkRedrawMoves()
+    }
+}
+
+function checkRedrawMoves() {
+    if (checkEnd()) {
+        redrawRemixButton(progressBarcolor, alertColor)
+    } else {
+        redrawRemixButton()
     }
 }
 
