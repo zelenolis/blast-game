@@ -2,6 +2,7 @@ import Back from '../assets/back.jpg'
 import { startFontSize } from '../utils/resize.js'
 import { baseColor, darkColor, lightColor } from '../constants.js'
 import { resetRemixes } from '../components/endgame.js'
+import { checkboxDrawPos } from '../utils/positions.js'
 
 
 const container = document.getElementById('container')
@@ -42,8 +43,32 @@ function startTextDraw() {
     resetRemixes()
 }
 
+function checkboxDraw() {
+    const coords = checkboxDrawPos()
+    const height = startFontSize(canvasW) * 0.7
+    ctx.strokeStyle  = lightColor
+    ctx.lineWidth = 3
+    ctx.beginPath()
+    ctx.roundRect(coords[0], coords[1], height, height, [10])
+    ctx.stroke()
+}
+
+function checkboxTextDraw() {
+    const coords = checkboxDrawPos()
+    const height = startFontSize(canvasW) * 0.7
+    document.fonts.load('10pt "Scary"').then(() => {
+        ctx.font = `${height}px Scary`
+        ctx.fillStyle = lightColor
+        ctx.textAlign = 'left'
+        ctx.textBaseline = 'top'
+        ctx.fillText('Sound', coords[0] + 2 * height, coords[1])
+        checkboxDraw()
+    })
+}
+
 export function startScreen() {
     clearCanvas(darkColor)
     startLogoDraw()
+    checkboxTextDraw()
     startTextDraw()
 }
