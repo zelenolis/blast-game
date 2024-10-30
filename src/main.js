@@ -5,7 +5,7 @@ window.addEventListener('load', function() {
 })
 
 import './style.css'
-import { startScreen, canvas, clearCanvas } from './visuals/welcome.js'
+import { startScreen, canvas, clearCanvas, checkboxDraw } from './visuals/welcome.js'
 import { fieldDraw } from './visuals/background.js'
 import { fieldInit } from './components/game.js'
 import { clickChecker } from './components/move.js'
@@ -50,6 +50,7 @@ function clickSound(e) {
     if (x > startAudio[0] && x < startAudio[0] + startAudio[2] && y > startAudio[1] && y < startAudio[1] + startAudio[2]) {
         soundOn()
         playStart()
+        checkboxDraw()
         return true
     } else {
         return false
