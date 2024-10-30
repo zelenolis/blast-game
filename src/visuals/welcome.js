@@ -1,6 +1,6 @@
 import Back from '../assets/back.jpg'
 import { startFontSize } from '../utils/resize.js'
-import { baseColor, darkColor } from '../constants.js'
+import { baseColor, darkColor, lightColor } from '../constants.js'
 import { resetRemixes } from '../components/endgame.js'
 
 
@@ -35,9 +35,9 @@ function startLogoDraw() {
 function startTextDraw() {
     document.fonts.load('10pt "Scary"').then(() => {
         ctx.font = `${startFontSize(canvasW)}px Scary`
-        ctx.fillStyle = darkColor
+        ctx.fillStyle = lightColor
         ctx.textAlign = "center"
-        ctx.fillText('click to start', canvasW / 2, canvasH - canvasH / 3)
+        ctx.fillText('click to start', canvasW / 2, canvasH - canvasH / 2)
     })
     resetRemixes()
 }
