@@ -10,6 +10,7 @@ import { remixField, fieldInit } from './game.js'
 import { tilesRedraw } from '../visuals/background.js'
 import { redrawRemixButton, gameOverDraw, resetLevel } from '../visuals/progress.js'
 import { gamestart } from '../main.js'
+import { playClick, playMiss } from '../utils/audio.js'
 
 
 export function clickChecker(x, y) {
@@ -40,9 +41,11 @@ function findTileArray(x, y) {
     for (let tile of field) {
         if (tile.x === x && tile.y === y) {
             if (getNeighbors(x,y, tile.color).length === 0) {
+                playMiss()
                 return
             }
             getAllConnectedTiles(x, y)
+            playClick()
         }
     }
 }
