@@ -51,20 +51,6 @@ export async function destroyTiles(arr, fieldLenght) {
     await Promise.all(animationPromises);
 }
 
-export function appearTile1(x, y, color) {
-    return new Promise(resolve => {
-        const dimensions = getCoordsByTylePos(x, y)
-        const tileImg = new Image()
-        tileImg.src = colorMap[color]
-        tileImg.onload = function() {
-            ctx.fillStyle = darkColor
-            ctx.fillRect(dimensions[0], dimensions[1], dimensions[2], dimensions[2])
-            ctx.drawImage(tileImg, dimensions[0], dimensions[1], dimensions[2], dimensions[2])
-            resolve()
-        }
-    })
-}
-
 export function appearTile(x, y, color) {
     return new Promise(resolve => {
         const dimensions = getCoordsByTylePos(x, y)
@@ -92,32 +78,6 @@ export function appearTile(x, y, color) {
             animate()
         }
     })
-
-
-
-    const dimensions = getCoordsByTylePos(x, y)
-    const tileImg = new Image()
-    tileImg.src = colorMap[color]
-    let animateY = 0
-    const animationspeed = 8
-
-
-    tileImg.onload = function() {
-        function animate() {
-            ctx.fillStyle = darkColor
-            ctx.fillRect(dimensions[0], dimensions[1], dimensions[2], animateY)
-            ctx.drawImage(tileImg, dimensions[0], dimensions[1], dimensions[2], animateY)
-
-            animateY += animationspeed
-            if(animateY < dimensions[2]) {
-                requestAnimationFrame(animate)
-            } else {
-                ctx.fillRect(dimensions[0], dimensions[1], dimensions[2], dimensions[2])
-                ctx.drawImage(tileImg, dimensions[0], dimensions[1], dimensions[2], dimensions[2])
-            }
-        }
-        animate()
-    }
 }
 
 export function fallingTile(x, y, yShift, color) {
