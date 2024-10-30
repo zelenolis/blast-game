@@ -51,4 +51,7 @@ export default {
         compress: true,
         port: 9000,
     },
+    performance: {
+        maxAssetSize: 500000
+    }
 }
