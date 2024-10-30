@@ -31,6 +31,7 @@ export function playMiss() {
 export async function playStart() {
     if (soundIsOn) {
         startSound.play();
+        startSound.loop = true
     }
 }
 
@@ -38,4 +39,11 @@ export async function playStartStop() {
     startSound.play();
     startSound.pause();
     startSound.currentTime = 0;
+}
+
+export function soundOn() {
+    soundIsOn = !soundIsOn
+    if (!soundIsOn) {
+        playStartStop()
+    }
 }
