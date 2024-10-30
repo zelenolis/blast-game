@@ -36,6 +36,10 @@ export default {
             {
                 test: /\.(png|svg|jpg|gif|ico)$/,
                 type: 'asset/resource'
+            },
+            {
+                test: /\.(mp3|wav)$/,
+                use: 'file-loader',
             }
         ]
     },
