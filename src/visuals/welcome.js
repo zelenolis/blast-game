@@ -45,11 +45,10 @@ function startTextDraw() {
 
 function checkboxDraw() {
     const coords = checkboxDrawPos()
-    const height = startFontSize(canvasW) * 0.7
     ctx.strokeStyle  = lightColor
     ctx.lineWidth = 3
     ctx.beginPath()
-    ctx.roundRect(coords[0], coords[1], height, height, [10])
+    ctx.roundRect(coords[0], coords[1], coords[2], coords[3], [10])
     ctx.stroke()
 }
 

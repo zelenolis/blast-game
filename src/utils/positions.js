@@ -1,4 +1,5 @@
 import { canvasW, canvasH } from "../visuals/welcome.js";
+import { startFontSize } from "./resize.js";
 
 const headerHeight = 0.15
 const fieldHeight = 0.7
@@ -6,12 +7,13 @@ const footerHeight = 0.15
 const headerThirdPart = 0.3
 
 export function checkboxDrawPos() {
+    const height = startFontSize(canvasW) * 0.7
     const padding = 10
     const rectDimension = [
         canvasW * headerThirdPart + padding, 
         0 + 3 * padding, 
-        canvasW - 2 * canvasW * headerThirdPart - 2 * padding, 
-        canvasH * footerHeight - 6 * padding]
+        height, 
+        height]
     return rectDimension
 }
 
