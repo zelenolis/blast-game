@@ -5,6 +5,16 @@ const fieldHeight = 0.7
 const footerHeight = 0.15
 const headerThirdPart = 0.3
 
+export function checkboxDrawPos() {
+    const padding = 10
+    const rectDimension = [
+        canvasW * headerThirdPart + padding, 
+        0 + 3 * padding, 
+        canvasW - 2 * canvasW * headerThirdPart - 2 * padding, 
+        canvasH * footerHeight - 6 * padding]
+    return rectDimension
+}
+
 export function levelPos() {
     const rectDimension = [0, 0, canvasW * headerThirdPart, canvasH * footerHeight]
     return rectDimension
