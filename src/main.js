@@ -9,6 +9,8 @@ import { startScreen, canvas, clearCanvas } from './visuals/welcome.js'
 import { fieldDraw } from './visuals/background.js'
 import { fieldInit } from './components/game.js'
 import { clickChecker } from './components/move.js'
+import { checkboxDrawPos } from './utils/positions.js'
+import { soundOn, playStart } from './utils/audio.js'
 
 // game status: init - start screen, game - game is on
 let gameStatus = 'init'
@@ -21,6 +23,7 @@ canvas.addEventListener('click', function(e) {
 
     switch (gameStatus) {
         case 'init':
+            if (clickSound(e)){ return }
             clearCanvas()
             fieldDraw()
             gameStatus = 'game'
@@ -35,6 +38,21 @@ function clickCoords(e) {
     const x = e.clientX - rect.left
     const y = e.clientY - rect.top
     clickChecker(x, y)
+}
+
+function clickSound(e) {
+    const rect = canvas.getBoundingClientRect()
+    const x = e.clientX - rect.left
+    const y = e.clientY - rect.top
+    const startAudio = checkboxDrawPos()
+
+    if (x > startAudio[0] && x < startAudio[0] + startAudio[2] && y > startAudio[1] && y < startAudio[1] + startAudio[2]) {
+        soundOn()
+        playStart()
+        return true
+    } else {
+        return false
+    }
 }
 
 export function gamestart() {
