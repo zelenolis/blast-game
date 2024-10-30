@@ -11,6 +11,7 @@ import { ctx } from "./welcome.js"
 import { darkColor } from "../constants.js"
 import { fieldPos } from "../utils/positions.js"
 import { field } from '../components/game.js'
+import { playPop } from '../utils/audio.js'
 
 
 const colorMap = {
@@ -57,7 +58,7 @@ export function appearTile(x, y, color) {
         const tileImg = new Image()
         tileImg.src = colorMap[color]
         let animateScale = 0
-        const animationspeed = 15
+        const animationspeed = 10
 
         tileImg.onload = function() {
             function animate() {
@@ -72,6 +73,7 @@ export function appearTile(x, y, color) {
                 } else {
                     ctx.fillRect(dimensions[0], dimensions[1], dimensions[2], dimensions[2])
                     ctx.drawImage(tileImg, dimensions[0], dimensions[1], dimensions[2], dimensions[2])
+                    playPop()
                     resolve()
                 }
             }
