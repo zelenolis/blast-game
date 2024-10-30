@@ -10,8 +10,8 @@ export function checkboxDrawPos() {
     const height = startFontSize(canvasW) * 0.7
     const padding = 10
     const rectDimension = [
-        canvasW * headerThirdPart + padding, 
-        0 + 3 * padding, 
+        0 + height, 
+        0 + height, 
         height, 
         height]
     return rectDimension

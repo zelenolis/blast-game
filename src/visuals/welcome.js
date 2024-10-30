@@ -47,9 +47,11 @@ function checkboxDraw() {
     const coords = checkboxDrawPos()
     ctx.strokeStyle  = lightColor
     ctx.lineWidth = 3
+    ctx.fillStyle = darkColor
     ctx.beginPath()
     ctx.roundRect(coords[0], coords[1], coords[2], coords[3], [10])
     ctx.stroke()
+    ctx.fill()
 }
 
 function checkboxTextDraw() {
@@ -60,7 +62,8 @@ function checkboxTextDraw() {
         ctx.fillStyle = lightColor
         ctx.textAlign = 'left'
         ctx.textBaseline = 'top'
-        ctx.fillText('Sound', coords[0] + 2 * height, coords[1])
+        // 6 - is double ctx.lineWidth = 3 in checkboxDraw()
+        ctx.fillText('Sound', coords[0] + 2 * height, coords[1] + 6)
         checkboxDraw()
     })
 }
