@@ -102,7 +102,7 @@ async function moveTile(xCoord, yCoord, tileLenght, fallingLenght, color) {
         const tileImg = new Image()
         tileImg.src = colorMap[color]
         let animateY = 0
-        const animationspeed = 8
+        const animationspeed = 15
 
         tileImg.onload = function() {
             function animate() {
