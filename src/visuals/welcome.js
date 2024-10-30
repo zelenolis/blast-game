@@ -1,5 +1,5 @@
-import Pumpkin from '../assets/pumpkin.png'
-import { startLogoSize, startFontSize } from '../utils/resize.js'
+import Back from '../assets/back.jpg'
+import { startFontSize } from '../utils/resize.js'
 import { baseColor, darkColor } from '../constants.js'
 import { resetRemixes } from '../components/endgame.js'
 
@@ -14,22 +14,22 @@ export const canvasH = (canvas.height = container.offsetHeight)
 export const ctx = canvas.getContext('2d')
 
 
-export function clearCanvas() {
-    ctx.fillStyle = baseColor
+export function clearCanvas(col = baseColor) {
+    ctx.fillStyle = col
     ctx.fillRect(0, 0, canvasW, canvasH)
 }
 
 function startLogoDraw() {
-    
     const startImage = new Image()
 
     startImage.onload = function() {
-        const dimensions = startLogoSize(canvasW, startImage.width, startImage.height)
-        const x = canvasW / 2 - dimensions[0] / 2
-        const y = canvasH / 3 - dimensions[1] / 2
-        ctx.drawImage(startImage, x, y, dimensions[0], dimensions[1])
+        if (canvasW > canvasH) {
+            ctx.drawImage(startImage, 0, canvasH - canvasW, canvasW, canvasW)
+        } else {
+            ctx.drawImage(startImage, 0, 0, canvasH, canvasH)
+        }
     }
-    startImage.src = Pumpkin
+    startImage.src = Back
 }
 
 function startTextDraw() {
@@ -43,7 +43,7 @@ function startTextDraw() {
 }
 
 export function startScreen() {
-    clearCanvas()
+    clearCanvas(darkColor)
     startLogoDraw()
     startTextDraw()
 }
