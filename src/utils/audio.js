@@ -50,3 +50,7 @@ export function soundOn() {
         playStartStop()
     }
 }
+
+export function getSound() {
+    return soundIsOn
+}
