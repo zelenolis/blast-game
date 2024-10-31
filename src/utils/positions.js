@@ -5,6 +5,7 @@ const headerHeight = 0.15
 const fieldHeight = 0.7
 const footerHeight = 0.15
 const headerThirdPart = 0.3
+const padding = 10
 
 export function checkboxDrawPos() {
     const height = startFontSize(canvasW) * 0.7
@@ -53,7 +54,7 @@ export function totalScorePos() {
 export function fieldPos() {
     if (
         canvasW > canvasH || 
-        canvasW + canvasW * (footerHeight + headerHeight) > canvasH
+        canvasW + canvasW * (footerHeight + headerHeight) + padding * 4 > canvasH
     ) {
         const filedLenght = canvasH * fieldHeight
         const y = canvasH * headerHeight
@@ -68,7 +69,6 @@ export function fieldPos() {
 }
 
 export function remixButtonPos() {
-    const padding = 10
     const rectDimension = [
         canvasW * headerThirdPart + padding, 
         canvasH * (headerHeight + fieldHeight) + padding, 
