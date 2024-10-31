@@ -8,6 +8,7 @@ import Color7 from '../assets/set/7.png'
 import Color8 from '../assets/set/8.png'
 import Color0 from '../assets/set/0.png'
 import Ghost from '../assets/ghost.png'
+import Explosion from '../assets/explosion.png'
 import { ctx } from "./welcome.js"
 import { darkColor } from "../constants.js"
 import { fieldPos } from "../utils/positions.js"
@@ -124,6 +125,35 @@ async function moveTile(xCoord, yCoord, tileLenght, fallingLenght, color) {
                     ctx.fillStyle = darkColor
                     ctx.fillRect(xCoord, yCoord + fallingLenght, tileLenght, tileLenght)
                     ctx.drawImage(tileImg, xCoord, yCoord + fallingLenght, tileLenght, tileLenght)
+                    resolve()
+                }
+            }
+            animate()
+        }
+    })
+}
+
+export function explosion(x, y) {
+    return new Promise(resolve => {
+        const dimensions = getCoordsByTylePos(x, y)
+        const boom = new Image()
+        boom.src = Explosion
+        let animateScale = 0
+        const animationspeed = 10
+
+        boom.onload = function() {
+            function animate() {                
+                const shift = (dimensions[2] - animateScale) / 2
+                ctx.fillStyle = darkColor
+                ctx.fillRect(dimensions[0], dimensions[1], dimensions[2], dimensions[2])
+                ctx.drawImage(boom, dimensions[0] + shift, dimensions[1] + shift, animateScale, animateScale)
+
+                animateScale += animationspeed
+
+                if (animateScale < dimensions[2]) {
+                    requestAnimationFrame(animate)
+                } else {
+                    ctx.fillRect(dimensions[0], dimensions[1], dimensions[2], dimensions[2])
                     resolve()
                 }
             }
