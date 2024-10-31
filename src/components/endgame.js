@@ -3,6 +3,7 @@ import { getNeighbors } from "./move.js";
 import { field } from "./game.js";
 import { redrawRemixButton } from "../visuals/progress.js";
 import { alertColor, progressBarcolor } from "../constants.js";
+import { playLaugh } from "../utils/audio.js";
 
 let remixRemains = 0
 
@@ -23,6 +24,7 @@ export function checkEnd() {
             return false
         }
     }
+    playLaugh()
     return true
 }
 
@@ -37,6 +39,7 @@ export function checkEndGame() {
         if (remixRemains < 1) {
             resolve(true)
         } else {
+            playLaugh()
             redrawRemixButton(progressBarcolor, alertColor)
             resolve(false)
         }
