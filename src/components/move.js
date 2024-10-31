@@ -10,7 +10,7 @@ import { remixField, fieldInit } from './game.js'
 import { tilesRedraw, switchAudioBox } from '../visuals/background.js'
 import { redrawRemixButton, gameOverDraw, resetLevel } from '../visuals/progress.js'
 import { gamestart } from '../main.js'
-import { playClick, playMiss, soundOn, playStart } from '../utils/audio.js'
+import { playClick, playMiss, soundOn, playStart, playExplosion } from '../utils/audio.js'
 
 
 export function clickChecker(x, y) {
@@ -69,10 +69,15 @@ function findTileArray(x, y) {
     }
 }
 
-function bombFound() {
+async function bombFound() {
+    const animationPromises = []
+    playExplosion()
     for (let item of field) {
-        explosion(item.x, item.y)
+        animationPromises.push(explosion(item.x, item.y))
     }
+    await Promise.all(animationPromises)
+    fieldInit()
+    tilesRedraw()
 }
 
 export function getNeighbors(x, y, color) {
