@@ -2,6 +2,7 @@ import Pop from '../assets/pop.mp3'
 import Click from '../assets/click.mp3'
 import Miss from '../assets/miss.mp3'
 import Start from '../assets/Halloween-song.mp3'
+import Laugh from '../assets/laugh.mp3'
 
 const popSound = new Audio(Pop)
 popSound.volume = 0.5
@@ -11,6 +12,8 @@ const missSound = new Audio(Miss)
 missSound.volume = 0.5
 const startSound = new Audio(Start)
 startSound.volume = 0.5
+const laughSound = new Audio(Laugh)
+laughSound.volume = 0.5
 
 let soundIsOn = false
 
@@ -29,6 +32,12 @@ export function playClick() {
 export function playMiss() {
     if (soundIsOn) {
         missSound.play()
+    }    
+}
+
+export function playLaugh() {
+    if (soundIsOn) {
+        laughSound.play()
     }    
 }
 
