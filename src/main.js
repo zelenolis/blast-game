@@ -10,7 +10,7 @@ import { fieldDraw } from './visuals/background.js'
 import { fieldInit } from './components/game.js'
 import { clickChecker } from './components/move.js'
 import { checkboxDrawPos } from './utils/positions.js'
-import { soundOn, playStart, playStartStop } from './utils/audio.js'
+import { soundOn, playStart, playStartStop, playCackle } from './utils/audio.js'
 
 // game status: init - start screen, game - game is on
 let gameStatus = 'init'
@@ -27,6 +27,7 @@ canvas.addEventListener('click', function(e) {
             clearCanvas()
             fieldDraw()
             playStartStop()
+            playCackle()
             gameStatus = 'game'
             break
         case 'game':
