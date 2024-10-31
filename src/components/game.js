@@ -27,6 +27,10 @@ export function newTile(x, y) {
 }
 
 function randomColor() {
+    const bomb = 1 + Math.floor(Math.random() * 20)
+    if (bomb === 20) {
+        return 0
+    }
     return 1 + Math.floor(Math.random() * colours)
 }
 
