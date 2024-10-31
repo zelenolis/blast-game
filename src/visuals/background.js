@@ -133,7 +133,7 @@ function remixButtonDraw() {
 export function switchAudioBox() {
     const coords = ingameAudioPos()
     ctx.fillStyle = baseColor
-    ctx.fillRect(coords[0], coords[1], coords[3], coords[3])
+    ctx.fillRect(coords[0], coords[1], coords[2], coords[2])
     const soundImage = new Image()
     soundImage.src = getSound() ? SoundOn : SoundOff
     soundImage.onload = function() {

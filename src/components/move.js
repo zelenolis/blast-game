@@ -17,7 +17,6 @@ export function clickChecker(x, y) {
     const frame = fieldPos()
     const mix = remixButtonPos()
     const audioOn = ingameAudioPos()
-    audioOn[0] += audioOn[3] / 2
 
     if (x > audioOn[0] && x < audioOn[0] + audioOn[2] && y > audioOn[1] && y < audioOn[1] + audioOn[2]) {
         soundOn()
