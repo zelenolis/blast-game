@@ -1,6 +1,6 @@
 import { fieldPos, remixButtonPos, ingameAudioPos } from '../utils/positions.js'
 import { field, newTile } from './game.js'
-import { destroyTiles, fallingTile, appearTile } from '../visuals/animations.js'
+import { destroyTiles, fallingTile, appearTile, explosion } from '../visuals/animations.js'
 import { filedX, filedY, alertColor, progressBarcolor } from '../constants.js'
 import { arraySubstract } from '../utils/misc.js'
 import { levelProgressUp } from './scores.js'
@@ -56,7 +56,7 @@ function findTileArray(x, y) {
     for (let tile of field) {
         if (tile.x === x && tile.y === y) {
             if(tile.color === 0) {
-                console.log('bomb!')
+                bombFound()
                 return
             }
             if (getNeighbors(x,y, tile.color).length === 0) {
@@ -66,6 +66,12 @@ function findTileArray(x, y) {
             getAllConnectedTiles(x, y)
             playClick()
         }
+    }
+}
+
+function bombFound() {
+    for (let item of field) {
+        explosion(item.x, item.y)
     }
 }
 
