@@ -17,16 +17,6 @@ export function checkboxDrawPos() {
     return rectDimension
 }
 
-export function ingameAudioPos() {
-    const height = startFontSize(canvasW) * 0.7
-    const rectDimension = [
-        0 + height,
-        canvasH - 2 * height, 
-        height, 
-        height]
-    return rectDimension
-}
-
 export function levelPos() {
     const rectDimension = [0, 0, canvasW * headerThirdPart, canvasH * footerHeight]
     return rectDimension
@@ -69,10 +59,22 @@ export function fieldPos() {
 }
 
 export function remixButtonPos() {
+    const field = fieldPos()
     const rectDimension = [
         canvasW * headerThirdPart + padding, 
-        canvasH * (headerHeight + fieldHeight) + padding, 
+        canvasH * footerHeight + field[2] + padding,
         canvasW - 2 * canvasW * headerThirdPart - 2 * padding, 
         canvasH * footerHeight - 2 * padding]
+    return rectDimension
+}
+
+export function ingameAudioPos() {
+    const field = fieldPos()
+    const height = startFontSize(canvasW) * 0.7
+    const rectDimension = [
+        0 + height,
+        canvasH * footerHeight * 1.5 + field[2] - padding,
+        height, 
+        height]
     return rectDimension
 }
