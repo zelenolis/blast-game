@@ -111,6 +111,9 @@ async function moveTile(xCoord, yCoord, tileLenght, fallingLenght, color) {
                 ctx.fillStyle = darkColor
                 ctx.fillRect(xCoord, yCoord + animateY, tileLenght, tileLenght)
                 ctx.drawImage(tileImg, xCoord, yCoord + animateY, tileLenght, tileLenght)
+                if (animateY > 0) {
+                    ctx.fillRect(xCoord, yCoord, tileLenght,  animateY)
+                }
 
                 animateY += animationspeed
                 if(animateY <= fallingLenght) {
