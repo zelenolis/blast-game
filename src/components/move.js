@@ -78,6 +78,7 @@ async function bombFound() {
     await Promise.all(animationPromises)
     fieldInit()
     tilesRedraw()
+    await levelProgressUp(field.length)
 }
 
 export function getNeighbors(x, y, color) {
