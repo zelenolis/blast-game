@@ -10,7 +10,7 @@ import { remixField, fieldInit } from './game.js'
 import { tilesRedraw, switchAudioBox } from '../visuals/background.js'
 import { redrawRemixButton, gameOverDraw, resetLevel } from '../visuals/progress.js'
 import { gamestart } from '../main.js'
-import { playClick, playMiss, soundOn } from '../utils/audio.js'
+import { playClick, playMiss, soundOn, playStart } from '../utils/audio.js'
 
 
 export function clickChecker(x, y) {
@@ -169,6 +169,7 @@ function updateField(column) {
 async function checkForEnd() {
     const end = await checkEndGame()
     if (end) {
+        playStart()
         gameOverDraw()
         gamestart()
         fieldInit()
