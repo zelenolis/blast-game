@@ -22,16 +22,19 @@ export function clearCanvas(col = baseColor) {
 }
 
 function startLogoDraw() {
-    const startImage = new Image()
-
-    startImage.onload = function() {
-        if (canvasW > canvasH) {
-            ctx.drawImage(startImage, 0, canvasH - canvasW, canvasW, canvasW)
-        } else {
-            ctx.drawImage(startImage, 0, 0, canvasH, canvasH)
+    return new Promise(resolve => {
+        const startImage = new Image()
+        startImage.onload = function() {
+            if (canvasW > canvasH) {
+                ctx.drawImage(startImage, 0, canvasH - canvasW, canvasW, canvasW)
+            } else {
+                ctx.drawImage(startImage, 0, 0, canvasH, canvasH)
+            }
+            resolve()
         }
-    }
-    startImage.src = Back
+        startImage.src = Back
+    })
+    
 }
 
 function startTextDraw() {
@@ -75,9 +78,9 @@ function checkboxTextDraw() {
     })
 }
 
-export function startScreen() {
+export async function startScreen() {
     clearCanvas(darkColor)
-    startLogoDraw()
+    await startLogoDraw()
     checkboxTextDraw()
     startTextDraw()
 }
