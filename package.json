@@ -4,7 +4,7 @@
   "description": "",
   "type": "module",
   "scripts": {
-    "test": "jest",
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
     "build": "webpack",
     "start": "webpack serve --open",
     "format": "prettier --write 'src/**/*.{js,css}'"
