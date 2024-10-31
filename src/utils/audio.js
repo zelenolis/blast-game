@@ -44,7 +44,7 @@ export function playLaugh() {
 export async function playStart() {
     if (soundIsOn) {
         startSound.play()
-        startSound.loop = true
+        //startSound.loop = true
     }
 }
 
