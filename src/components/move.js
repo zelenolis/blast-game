@@ -55,6 +55,10 @@ function findTileCoords(x, y, frame) {
 function findTileArray(x, y) {
     for (let tile of field) {
         if (tile.x === x && tile.y === y) {
+            if(tile.color === 0) {
+                console.log('bomb!')
+                return
+            }
             if (getNeighbors(x,y, tile.color).length === 0) {
                 playMiss()
                 return
