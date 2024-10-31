@@ -31,6 +31,10 @@ export function checkEnd() {
 export function checkEndGame() {
     return new Promise(resolve => {
         for (let i = 0; i < field.length; i++) {
+            if (field[i].color === 0) {
+                resolve(false)
+                return
+            }
             if (getNeighbors(field[i].x, field[i].y, field[i].color).length > 0) {
                 resolve(false)
                 return
