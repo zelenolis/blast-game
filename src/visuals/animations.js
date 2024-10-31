@@ -6,6 +6,7 @@ import Color5 from '../assets/set/5.png'
 import Color6 from '../assets/set/6.png'
 import Color7 from '../assets/set/7.png'
 import Color8 from '../assets/set/8.png'
+import Color0 from '../assets/set/0.png'
 import Ghost from '../assets/ghost.png'
 import { ctx } from "./welcome.js"
 import { darkColor } from "../constants.js"
@@ -23,6 +24,7 @@ const colorMap = {
     6: Color6,
     7: Color7,
     8: Color8,
+    0: Color0,
 }
 
 function tileDestroy(x, y, length) {
