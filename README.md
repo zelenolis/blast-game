@@ -24,7 +24,7 @@ Screenshots:
     - *field size ( x must be the same as y )*
     - *tiles counts*
 
-you can change all them to change the gameplay
+you can change all of them to change the gameplay, but do that wisely!
 
 ### Development server
 - clone the repository
