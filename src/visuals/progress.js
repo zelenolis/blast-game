@@ -1,9 +1,20 @@
-import { getLevel, getTotalScores } from "../components/scores.js"
-import { levelPos, currentScorePos, totalScorePos, remixButtonPos, fieldPos } from "../utils/positions.js"
-import { lightColor, baseColor, darkColor, progressBarcolor } from "../constants.js"
-import { ctx, canvasW, canvasH } from "./welcome.js"
-import { textPrint } from "./background.js"
-import { getRemixes } from "../components/endgame.js"
+import { getLevel, getTotalScores } from '../components/scores.js'
+import {
+    levelPos,
+    currentScorePos,
+    totalScorePos,
+    remixButtonPos,
+    fieldPos,
+} from '../utils/positions.js'
+import {
+    lightColor,
+    baseColor,
+    darkColor,
+    progressBarcolor,
+} from '../constants.js'
+import { ctx, canvasW, canvasH } from './welcome.js'
+import { textPrint } from './background.js'
+import { getRemixes } from '../components/endgame.js'
 
 let currentLevel = 0
 let lastProgress = 0
@@ -28,27 +39,33 @@ function redrawLevel() {
     ctx.fillStyle = darkColor
 }
 
-async function redrawProgress (progress, needProgress) {
+async function redrawProgress(progress, needProgress) {
     const coords = currentScorePos()
     ctx.fillStyle = darkColor
-    ctx.strokeStyle  = darkColor
-    ctx.beginPath();
+    ctx.strokeStyle = darkColor
+    ctx.beginPath()
     ctx.roundRect(coords[0], coords[1], coords[2], coords[3], [10])
-    ctx.stroke();
-    ctx.fill();
+    ctx.stroke()
+    ctx.fill()
 
     await drawBar(coords, progress, needProgress)
 }
 
 function drawBar(coords, progress, needProgress) {
     const animationSpeed = 1
-    return new Promise(resolve => {
+    return new Promise((resolve) => {
         function animate() {
             ctx.fillStyle = progressBarcolor
-            ctx.strokeStyle  = progressBarcolor
-            ctx.beginPath();
-            ctx.roundRect(coords[0], coords[1], coords[2] * (lastProgress / needProgress), coords[3] , [10])
-            ctx.fill();
+            ctx.strokeStyle = progressBarcolor
+            ctx.beginPath()
+            ctx.roundRect(
+                coords[0],
+                coords[1],
+                coords[2] * (lastProgress / needProgress),
+                coords[3],
+                [10]
+            )
+            ctx.fill()
 
             lastProgress += animationSpeed
             if (lastProgress < progress) {
@@ -62,8 +79,6 @@ function drawBar(coords, progress, needProgress) {
     })
 }
 
-
-
 function redrawTotalScore() {
     const coords = totalScorePos()
     ctx.fillStyle = baseColor
@@ -73,14 +88,17 @@ function redrawTotalScore() {
     ctx.fillStyle = darkColor
 }
 
-export function redrawRemixButton(backColor = darkColor, textColor = lightColor) {
+export function redrawRemixButton(
+    backColor = darkColor,
+    textColor = lightColor
+) {
     const coords = remixButtonPos()
-    ctx.strokeStyle  = backColor
-    ctx.fillStyle  = backColor
-    ctx.beginPath();
+    ctx.strokeStyle = backColor
+    ctx.fillStyle = backColor
+    ctx.beginPath()
     ctx.roundRect(coords[0], coords[1], coords[2], coords[3], [10])
-    ctx.stroke();
-    ctx.fill();
+    ctx.stroke()
+    ctx.fill()
     const text = `remix (${getRemixes()})`
 
     textPrint(text, coords, textColor)

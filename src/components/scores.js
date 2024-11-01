@@ -1,11 +1,11 @@
-import { updateScores } from "../visuals/progress.js"
+import { updateScores } from '../visuals/progress.js'
 
 let level = 0
 let levelProgress = 0
 let totalScores = 0
 
 function levelup() {
-    level +=1
+    level += 1
     levelProgress = 0
 }
 
@@ -22,7 +22,7 @@ export function getTotalScores() {
 }
 
 export function levelProgressUp(n) {
-    return new Promise(resolve => {
+    return new Promise((resolve) => {
         levelProgress += n
         totalScores += n
         const needProgress = Math.floor(10 * Math.pow(1.5, level))

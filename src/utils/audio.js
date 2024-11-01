@@ -38,25 +38,25 @@ export function playClick() {
 export function playMiss() {
     if (soundIsOn) {
         missSound.play()
-    }    
+    }
 }
 
 export function playLaugh() {
     if (soundIsOn) {
         laughSound.play()
-    }    
+    }
 }
 
 export function playCackle() {
     if (soundIsOn) {
         cackleSound.play()
-    }    
+    }
 }
 
 export function playExplosion() {
     if (soundIsOn) {
         explosion.play()
-    }    
+    }
 }
 
 export async function playStart() {
@@ -68,7 +68,7 @@ export async function playStart() {
 
 export async function playStartStop() {
     startSound.pause()
-    startSound.currentTime = 0;
+    startSound.currentTime = 0
 }
 
 export function soundOn() {

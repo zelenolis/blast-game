@@ -1,9 +1,9 @@
-import { remixes } from "../constants.js";
-import { getNeighbors } from "./move.js";
-import { field } from "./game.js";
-import { redrawRemixButton } from "../visuals/progress.js";
-import { alertColor, progressBarcolor } from "../constants.js";
-import { playLaugh } from "../utils/audio.js";
+import { remixes } from '../constants.js'
+import { getNeighbors } from './move.js'
+import { field } from './game.js'
+import { redrawRemixButton } from '../visuals/progress.js'
+import { alertColor, progressBarcolor } from '../constants.js'
+import { playLaugh } from '../utils/audio.js'
 
 let remixRemains = 0
 
@@ -29,13 +29,15 @@ export function checkEnd() {
 }
 
 export function checkEndGame() {
-    return new Promise(resolve => {
+    return new Promise((resolve) => {
         for (let i = 0; i < field.length; i++) {
             if (field[i].color === 0) {
                 resolve(false)
                 return
             }
-            if (getNeighbors(field[i].x, field[i].y, field[i].color).length > 0) {
+            if (
+                getNeighbors(field[i].x, field[i].y, field[i].color).length > 0
+            ) {
                 resolve(false)
                 return
             }

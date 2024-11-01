@@ -5,7 +5,6 @@ import { resetRemixes } from '../components/endgame.js'
 import { checkboxDrawPos } from '../utils/positions.js'
 import { getSound } from '../utils/audio.js'
 
-
 const container = document.getElementById('container')
 export const canvas = document.createElement('canvas')
 container.appendChild(canvas)
@@ -15,18 +14,23 @@ export const canvasH = (canvas.height = container.offsetHeight)
 
 export const ctx = canvas.getContext('2d')
 
-
 export function clearCanvas(col = baseColor) {
     ctx.fillStyle = col
     ctx.fillRect(0, 0, canvasW, canvasH)
 }
 
 function startLogoDraw() {
-    return new Promise(resolve => {
+    return new Promise((resolve) => {
         const startImage = new Image()
-        startImage.onload = function() {
+        startImage.onload = function () {
             if (canvasW > canvasH) {
-                ctx.drawImage(startImage, 0, canvasH - canvasW, canvasW, canvasW)
+                ctx.drawImage(
+                    startImage,
+                    0,
+                    canvasH - canvasW,
+                    canvasW,
+                    canvasW
+                )
             } else {
                 ctx.drawImage(startImage, 0, 0, canvasH, canvasH)
             }
@@ -34,14 +38,13 @@ function startLogoDraw() {
         }
         startImage.src = Back
     })
-    
 }
 
 function startTextDraw() {
     document.fonts.load('10pt "Scary"').then(() => {
         ctx.font = `${startFontSize(canvasW)}px Scary`
         ctx.fillStyle = lightColor
-        ctx.textAlign = "center"
+        ctx.textAlign = 'center'
         ctx.fillText('click to start', canvasW / 2, canvasH - canvasH / 2)
     })
     resetRemixes()
@@ -55,7 +58,7 @@ function clearRect(coords) {
 export function checkboxDraw() {
     const coords = checkboxDrawPos()
     clearRect(coords)
-    ctx.strokeStyle  = getSound() ? darkColor : lightColor
+    ctx.strokeStyle = getSound() ? darkColor : lightColor
     ctx.lineWidth = 3
     ctx.fillStyle = getSound() ? lightColor : darkColor
     ctx.beginPath()

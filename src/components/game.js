@@ -1,7 +1,7 @@
 import { filedX, filedY, colours } from '../constants.js'
-import { checkEnd } from './endgame.js';
+import { checkEnd } from './endgame.js'
 
-export const field = [];
+export const field = []
 
 class Tile {
     constructor(x, y, color) {
@@ -13,17 +13,17 @@ class Tile {
 
 export function fieldInit() {
     do {
-        field.length = 0;
+        field.length = 0
         for (let i = 0; i < filedX; i++) {
             for (let j = 0; j < filedY; j++) {
                 field.push(new Tile(i, j, randomColor()))
             }
         }
-    } while (checkEnd()) 
+    } while (checkEnd())
 }
 
 export function newTile(x, y) {
-    return {x: x, y: y, color: randomColor()}
+    return { x: x, y: y, color: randomColor() }
 }
 
 function randomColor() {
@@ -34,10 +34,9 @@ function randomColor() {
     return 1 + Math.floor(Math.random() * colours)
 }
 
-
 export function remixField() {
-    const allColors = field.map(item => item.color);
-    for (let i = allColors.length - 1; i > 0; i --) {
+    const allColors = field.map((item) => item.color)
+    for (let i = allColors.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1))
         const temp = allColors[i]
         allColors[i] = allColors[j]

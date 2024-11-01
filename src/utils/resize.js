@@ -1,4 +1,4 @@
-export function startFontSize (screenWidth) {
+export function startFontSize(screenWidth) {
     const maxEnlarge = 700
     const maxFontSize = 70
     if (screenWidth > maxEnlarge) {

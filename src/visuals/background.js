@@ -9,14 +9,20 @@ import Color8 from '../assets/set/8.png'
 import Color0 from '../assets/set/0.png'
 import SoundOn from '../assets/sound-on.png'
 import SoundOff from '../assets/sound-off.png'
-import { ctx, canvasW } from "./welcome.js";
-import { fieldPos, levelPos, currentScorePos, totalScorePos, remixButtonPos, ingameAudioPos } from "../utils/positions.js";
-import { darkColor, baseColor, lightColor } from "../constants.js";
-import { startFontSize } from "../utils/resize.js";
-import { field } from "../components/game.js";
+import { ctx, canvasW } from './welcome.js'
+import {
+    fieldPos,
+    levelPos,
+    currentScorePos,
+    totalScorePos,
+    remixButtonPos,
+    ingameAudioPos,
+} from '../utils/positions.js'
+import { darkColor, baseColor, lightColor } from '../constants.js'
+import { startFontSize } from '../utils/resize.js'
+import { field } from '../components/game.js'
 import { getRemixes } from '../components/endgame.js'
 import { getSound } from '../utils/audio.js'
-
 
 const colorMap = {
     1: Color1,
@@ -30,25 +36,23 @@ const colorMap = {
     0: Color0,
 }
 
-
 export function textPrint(txt, coords, textColor = lightColor) {
     document.fonts.load('10pt "Scary"').then(() => {
         const textHeight = startFontSize(canvasW) / 1.5
         ctx.font = `${textHeight}px Scary`
 
         const textMetrics = ctx.measureText(txt)
-        const textWidth = textMetrics.width;
+        const textWidth = textMetrics.width
 
-        const textX = coords[0] + (coords[2] - textWidth) / 2;
-        const textY = 1 + coords[1] + (coords[3] + textHeight) / 2;
+        const textX = coords[0] + (coords[2] - textWidth) / 2
+        const textY = 1 + coords[1] + (coords[3] + textHeight) / 2
 
-        ctx.textAlign = "start"
-        ctx.textBaseline = 'bottom';
+        ctx.textAlign = 'start'
+        ctx.textBaseline = 'bottom'
         ctx.fillStyle = textColor
         ctx.fillText(txt, textX, textY)
     })
 }
-
 
 function levelDraw() {
     const coords = levelPos()
@@ -63,11 +67,11 @@ function levelDraw() {
 function currentScoreDraw() {
     const coords = currentScorePos()
     ctx.fillStyle = darkColor
-    ctx.strokeStyle  = darkColor
-    ctx.beginPath();
+    ctx.strokeStyle = darkColor
+    ctx.beginPath()
     ctx.roundRect(coords[0], coords[1], coords[2], coords[3], [10])
-    ctx.stroke();
-    ctx.fill();
+    ctx.stroke()
+    ctx.fill()
 }
 
 function totalScoreDraw() {
@@ -111,7 +115,7 @@ function tileDraw(tile, coords) {
     const tileY = coords[1] + tile.y * tileLenght
     const tileImg = new Image()
 
-    tileImg.onload = function() {
+    tileImg.onload = function () {
         ctx.drawImage(tileImg, tileX, tileY, tileLenght, tileLenght)
     }
     tileImg.src = colorMap[tile.color]
@@ -119,8 +123,8 @@ function tileDraw(tile, coords) {
 
 function remixButtonDraw() {
     const coords = remixButtonPos()
-    ctx.strokeStyle  = darkColor
-    ctx.fillStyle  = darkColor
+    ctx.strokeStyle = darkColor
+    ctx.fillStyle = darkColor
     ctx.beginPath()
     ctx.roundRect(coords[0], coords[1], coords[2], coords[3], [10])
     ctx.stroke()
@@ -136,7 +140,7 @@ export function switchAudioBox() {
     ctx.fillRect(coords[0], coords[1], coords[2], coords[2])
     const soundImage = new Image()
     soundImage.src = getSound() ? SoundOn : SoundOff
-    soundImage.onload = function() {
+    soundImage.onload = function () {
         ctx.drawImage(soundImage, coords[0], coords[1], coords[2], coords[2])
     }
 }
