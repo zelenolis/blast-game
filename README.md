@@ -17,21 +17,27 @@ Screenshots:
 - You can play this game from your computer, phone or tablet.
 ---
 ### Development notes
+- You can track the development process by commits in the `develop` branch.
+- The file `./src/constants.js` contains game constants such as:
+    - *theme colors*
+    - *number of lives*
+    - *field size ( x must be the same as y )*
+    - *tiles counts*
 
-You can track the development process by commits in the `dev` branch.
+you can change all them to change the gameplay
 
-#### Development server
+### Development server
 - clone the repository
-- select `dev` branch
+- select `develop` branch
 - install dependencies
 - run `npm run start` for a dev server. If the page does not open automatically, navigate to http://localhost:9000/ in your browser
 
-#### Testing
+### Testing
 - Testing is organized using *Jest*.
 - `npm test` will run all test cases
 
-#### Buld
+### Buld
 - clone the repository
-- select `dev` branch
+- select `develop` branch
 - install dependencies
 - run `npm run build` to build the project. The build artifacts will be stored in the `dist/` directory.
