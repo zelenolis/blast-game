@@ -4,7 +4,6 @@ import {
     currentScorePos,
     totalScorePos,
     remixButtonPos,
-    fieldPos,
 } from '../utils/positions.js'
 import {
     lightColor,
