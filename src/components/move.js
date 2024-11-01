@@ -8,7 +8,7 @@ import {
 } from '../visuals/animations.js'
 import { filedX, filedY, alertColor, progressBarcolor } from '../constants.js'
 import { arraySubstract } from '../utils/misc.js'
-import { levelProgressUp } from './scores.js'
+import { levelProgressUp, resetProgress } from './scores.js'
 import { checkEndGame, checkEnd } from './endgame.js'
 import { getRemixes, decreaseRemixes, resetRemixes } from './endgame.js'
 import { remixField, fieldInit } from './game.js'
@@ -229,6 +229,7 @@ async function checkForEnd() {
         gamestart()
         fieldInit()
         resetLevel()
+        resetProgress()
         resetRemixes()
     }
 }
