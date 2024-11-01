@@ -38,3 +38,9 @@ function checkNextLevel(needProgress, currentProgress) {
         levelup()
     }
 }
+
+export function resetProgress() {
+    level = 0
+    levelProgress = 0
+    totalScores = 0
+}
