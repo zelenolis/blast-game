@@ -1,47 +1,89 @@
-import Pumpkin from '../assets/pumpkin.png'
-import { startLogoSize, startFontSize } from '../utils/resize.js'
-import { baseColor, darkColor } from '../constants.js'
-
+import Back from '../assets/back.jpg'
+import { startFontSize } from '../utils/resize.js'
+import { baseColor, darkColor, lightColor } from '../constants.js'
+import { resetRemixes } from '../components/endgame.js'
+import { checkboxDrawPos } from '../utils/positions.js'
+import { getSound } from '../utils/audio.js'
 
 const container = document.getElementById('container')
 export const canvas = document.createElement('canvas')
 container.appendChild(canvas)
 
-const canvasW = (canvas.width = container.offsetWidth)
-const canvasH = (canvas.height = container.offsetHeight)
+export const canvasW = (canvas.width = container.offsetWidth)
+export const canvasH = (canvas.height = container.offsetHeight)
 
-const ctx = canvas.getContext('2d')
+export const ctx = canvas.getContext('2d')
 
-
-function clearCanvas() {
-    ctx.fillStyle = baseColor
+export function clearCanvas(col = baseColor) {
+    ctx.fillStyle = col
     ctx.fillRect(0, 0, canvasW, canvasH)
 }
 
 function startLogoDraw() {
-    
-    const startImage = new Image()
-
-    startImage.onload = function() {
-        const dimensions = startLogoSize(canvasW, startImage.width, startImage.height)
-        const x = canvasW / 2 - dimensions[0] / 2
-        const y = canvasH / 3 - dimensions[1] / 2
-        ctx.drawImage(startImage, x, y, dimensions[0], dimensions[1])
-    }
-    startImage.src = Pumpkin
+    return new Promise((resolve) => {
+        const startImage = new Image()
+        startImage.onload = function () {
+            if (canvasW > canvasH) {
+                ctx.drawImage(
+                    startImage,
+                    0,
+                    canvasH - canvasW,
+                    canvasW,
+                    canvasW
+                )
+            } else {
+                ctx.drawImage(startImage, 0, 0, canvasH, canvasH)
+            }
+            resolve()
+        }
+        startImage.src = Back
+    })
 }
 
 function startTextDraw() {
     document.fonts.load('10pt "Scary"').then(() => {
         ctx.font = `${startFontSize(canvasW)}px Scary`
-        ctx.fillStyle = darkColor
-        ctx.textAlign = "center"
-        ctx.fillText('click to start', canvasW / 2, canvasH - canvasH / 3)
+        ctx.fillStyle = lightColor
+        ctx.textAlign = 'center'
+        ctx.fillText('click to start', canvasW / 2, canvasH - canvasH / 2)
+    })
+    resetRemixes()
+}
+
+function clearRect(coords) {
+    ctx.fillStyle = darkColor
+    ctx.fillRect(coords[0], coords[1], coords[2], coords[3], [10])
+}
+
+export function checkboxDraw() {
+    const coords = checkboxDrawPos()
+    clearRect(coords)
+    ctx.strokeStyle = getSound() ? darkColor : lightColor
+    ctx.lineWidth = 3
+    ctx.fillStyle = getSound() ? lightColor : darkColor
+    ctx.beginPath()
+    ctx.roundRect(coords[0], coords[1], coords[2], coords[3], [10])
+    ctx.stroke()
+    ctx.fill()
+}
+
+function checkboxTextDraw() {
+    const coords = checkboxDrawPos()
+    const height = startFontSize(canvasW) * 0.7
+    document.fonts.load('10pt "Scary"').then(() => {
+        ctx.font = `${height}px Scary`
+        ctx.fillStyle = lightColor
+        ctx.textAlign = 'left'
+        ctx.textBaseline = 'top'
+        // 6 - is double ctx.lineWidth = 3 in checkboxDraw()
+        ctx.fillText('Sound', coords[0] + 2 * height, coords[1] + 6)
+        checkboxDraw()
     })
 }
 
-export function startScreen() {
-    clearCanvas()
-    startLogoDraw()
+export async function startScreen() {
+    clearCanvas(darkColor)
+    await startLogoDraw()
+    checkboxTextDraw()
     startTextDraw()
 }

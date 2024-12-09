@@ -16,7 +16,29 @@ body {
 #container {
     margin: 0;
     width: 90vw;
+    max-width: 1280px;
     height: 90vh;
     border-radius: 5px;
     overflow: hidden;
+}
+
+#loading-message {
+    font-size: 48px;
+    color: white;
+    animation: blink 1s infinite;
+    text-align: center;
+    margin-top: 20%;
+    height: 100vh;
+}
+
+@keyframes blink {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
 }

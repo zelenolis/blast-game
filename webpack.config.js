@@ -36,6 +36,10 @@ export default {
             {
                 test: /\.(png|svg|jpg|gif|ico)$/,
                 type: 'asset/resource'
+            },
+            {
+                test: /\.(mp3|wav)$/,
+                use: 'file-loader',
             }
         ]
     },
@@ -47,4 +51,7 @@ export default {
         compress: true,
         port: 9000,
     },
+    performance: {
+        maxAssetSize: 500000
+    }
 }
